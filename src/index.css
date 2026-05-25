@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Layer ──────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  h1,h2,h3,h4,h5,h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #f5f3ff; }
+  ::-webkit-scrollbar-thumb {
+    background: #a78bfa;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
+}
+
+/* ─── Component Layer (reusable Tailwind patterns) ── */
+@layer components {
+  /* Glass card base */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-xl border border-brand-100 rounded-2xl shadow-card
+           transition-all duration-300;
+  }
+  .glass-card-hover {
+    @apply hover:-translate-y-1 hover:shadow-card-hover hover:border-brand-200;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #5b21b6 0%, #8b5cf6 55%, #c084fc 100%);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5
+           rounded-full font-jakarta font-semibold text-white text-sm
+           bg-brand-gradient shadow-brand-sm
+           transition-all duration-300
+           hover:shadow-glow hover:-translate-y-0.5 hover:brightness-110
+           focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5
+           rounded-full font-jakarta font-semibold text-brand-700 text-sm
+           bg-white border border-brand-200
+           transition-all duration-300
+           hover:border-brand-400 hover:-translate-y-0.5 hover:shadow-brand-sm
+           focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2;
+  }
+  .btn-sm {
+    @apply px-5 py-2 text-xs;
+  }
+
+  /* Section badge pill */
+  .section-badge {
+    @apply inline-block px-4 py-1.5 rounded-full text-xs font-jakarta font-bold
+           uppercase tracking-wider text-brand-600 bg-brand-50 border border-brand-100
+           mb-3;
+  }
+
+  /* Nav link */
+  .nav-link {
+    @apply relative font-jakarta font-semibold text-sm text-slate-700
+           transition-colors duration-200 hover:text-brand-600
+           after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0
+           after:bg-brand-500 after:transition-all after:duration-200
+           hover:after:w-full;
+  }
+
+  /* Form input */
+  .form-input {
+    @apply w-full px-4 py-3 rounded-xl border border-brand-100 bg-white/70
+           font-inter text-sm text-slate-800 placeholder-slate-400
+           transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-brand-400 focus:bg-white;
+  }
+
+  /* Tech tag pill */
+  .tech-tag {
+    @apply px-3 py-1 rounded-full text-xs font-semibold text-slate-700
+           bg-white border border-brand-100 shadow-sm;
+  }
+
+  /* Tab button */
+  .tab-btn {
+    @apply px-5 py-2 rounded-full text-sm font-jakarta font-semibold
+           border border-brand-100 bg-white text-slate-700
+           transition-all duration-200
+           hover:border-brand-400 hover:text-brand-600;
+  }
+  .tab-btn-active {
+    @apply bg-brand-800 border-brand-800 text-white shadow-brand-sm;
+  }
+}
+
+/* ─── Utilities ─────────────────────────────────── */
+@layer utilities {
+  .font-jakarta { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+  .font-inter   { font-family: 'Inter', system-ui, sans-serif; }
+
+  .bg-brand-gradient {
+    background-image: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+  }
+  .bg-brand-gradient-r {
+    background-image: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 60%, #5b21b6 100%);
+  }
+  .bg-hero-gradient {
+    background: radial-gradient(circle at 50% -20%, #f5f3ff 0%, #faf5ff 50%, #ffffff 100%);
+  }
+
+  /* Pulse ring for live badge */
+  .pulse-ring::after {
+    content: '';
+    @apply absolute inset-0 rounded-full bg-brand-400 animate-ping opacity-60;
+  }
+
+  /* Custom range slider */
+  input[type="range"].styled-range {
+    @apply w-full h-1.5 rounded-full appearance-none outline-none cursor-pointer;
+    background: theme('colors.brand.100');
+  }
+  input[type="range"].styled-range::-webkit-slider-thumb {
+    @apply appearance-none w-5 h-5 rounded-full bg-brand-600 cursor-pointer shadow-brand-sm;
+    -webkit-appearance: none;
+  }
+
+  /* Code colors */
+  .code-blue   { @apply text-blue-400; }
+  .code-green  { @apply text-emerald-400; }
+  .code-purple { @apply text-purple-400; }
+  .code-yellow { @apply text-yellow-300; }
+  .code-orange { @apply text-rose-400; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+/* ─── Uiverse Card Styles ─── */
+.uiverse-card {
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 20px 20px 60px rgba(190, 190, 190, 0.15), -20px -20px 60px rgba(255, 255, 255, 0.8);
+}
+
+.uiverse-bg {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  outline: 2px solid white;
+}
+
+.uiverse-blob {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  opacity: 0.75;
+  filter: blur(35px);
+  animation: blob-bounce 8s infinite ease-in-out;
+}
+
+@keyframes blob-bounce {
+  0% {
+    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate(-100%, -100%) translate3d(100%, 0, 0);
+  }
+  50% {
+    transform: translate(-100%, -100%) translate3d(100%, 100%, 0);
+  }
+  75% {
+    transform: translate(-100%, -100%) translate3d(0, 100%, 0);
+  }
+  100% {
+    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+  }
+}
+
+/* ── Content Visibility: defer rendering of off-screen sections ─────────────
+   This is one of the highest-impact CSS performance optimizations available.
+   It tells the browser to skip rendering work for off-screen sections,
+   which dramatically reduces initial render time → better FCP / LCP / TBT    */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+/* Hero must render immediately — it IS the first paint (LCP element) */
+section:first-of-type {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
+}
+
+/* ── CSS Containment for animated elements ──────────────────────────────── */
+.animate-marquee {
+  will-change: transform;
+  contain: layout;
+  transform: translateZ(0); /* promote to GPU compositor layer */
+}
+.animate-spin-slow { will-change: transform; }
+.uiverse-blob      { will-change: transform; }
