@@ -238,3 +238,12 @@ section:first-of-type {
 }
 .animate-spin-slow { will-change: transform; }
 .uiverse-blob      { will-change: transform; }
+
+/* Custom scrollbar utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -65,7 +65,7 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
       {
         title: 'Core Backend APIs',
         desc: 'High-throughput, fully documented RESTful and GraphQL APIs built with rock-solid server-side logic.',
-        image: 'https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=500&q=80',
+        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=80',
         btnText: 'See Docs',
         link: '#/contact'
       },

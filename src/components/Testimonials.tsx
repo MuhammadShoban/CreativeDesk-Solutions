@@ -49,22 +49,40 @@ export default function Testimonials() {
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
     const scrollLeft = container.scrollLeft;
-    const itemWidth = container.scrollWidth / list.length;
-    const index = Math.round(scrollLeft / itemWidth);
-    if (index >= 0 && index < list.length) {
-      setActiveIndex(index);
+    const containerCenter = scrollLeft + container.clientWidth / 2;
+    
+    let closestIndex = 0;
+    let minDistance = Infinity;
+    
+    for (let i = 0; i < container.children.length; i++) {
+      const card = container.children[i] as HTMLElement;
+      if (!card) continue;
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(cardCenter - containerCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
     }
+    
+    setActiveIndex(closestIndex);
   };
 
   const scrollTo = (index: number) => {
-    if (scrollRef.current) {
-      const itemWidth = scrollRef.current.scrollWidth / list.length;
-      scrollRef.current.scrollTo({
-        left: index * itemWidth,
-        behavior: 'smooth'
-      });
-      setActiveIndex(index);
-    }
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const card = container.children[index] as HTMLElement;
+    if (!card) return;
+    
+    const containerCenter = container.clientWidth / 2;
+    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+    const targetScrollLeft = cardCenter - containerCenter;
+
+    container.scrollTo({
+      left: targetScrollLeft,
+      behavior: 'smooth'
+    });
+    setActiveIndex(index);
   };
 
   return (
@@ -111,7 +129,7 @@ export default function Testimonials() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 px-1 scroll-smooth"
+            className="relative flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 px-1 scroll-smooth"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {list.map((t, idx) => (
@@ -133,14 +151,22 @@ export default function Testimonials() {
             ))}
           </div>
           {/* Dot indicators */}
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex justify-center gap-0.5 mt-4">
             {list.map((_, i) => (
               <button
                 key={i}
                 onClick={() => scrollTo(i)}
-                className={`block h-2 rounded-full transition-all duration-300 outline-none ${activeIndex === i ? 'w-5 bg-brand-500' : 'w-2 bg-slate-200 hover:bg-slate-300'}`}
+                className="p-2 cursor-pointer outline-none group"
                 aria-label={`Go to slide ${i + 1}`}
-              />
+              >
+                <div
+                  className={`transition-all duration-300 h-2 rounded-full ${
+                    activeIndex === i 
+                      ? 'bg-brand-500 w-5' 
+                      : 'bg-slate-200 group-hover:bg-slate-300 w-2'
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

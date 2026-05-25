@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { serviceDetails } from '../data/serviceDetails';
 
 interface ServiceDetailProps {
@@ -10,6 +10,10 @@ export default function ServiceDetail({ currentHash }: ServiceDetailProps) {
   const cleanHash = currentHash.replace(/^#\/?/, '');
   const serviceId = cleanHash.split('/')[1] || '';
   const detail = serviceDetails[serviceId];
+
+  // Carousel Ref & State
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeDot, setActiveDot] = useState(0);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -25,6 +29,10 @@ export default function ServiceDetail({ currentHash }: ServiceDetailProps) {
   // Scroll to top on page load/hash change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ left: 0 });
+    }
+    setActiveDot(0);
   }, [serviceId]);
 
   if (!detail) {
@@ -70,6 +78,58 @@ export default function ServiceDetail({ currentHash }: ServiceDetailProps) {
     if (formElement) {
       formElement.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  // Carousel handlers
+  const scroll = (direction: 'left' | 'right') => {
+    const totalItems = detail.offerings.length;
+    let nextIndex = activeDot;
+    if (direction === 'left') {
+      nextIndex = Math.max(0, activeDot - 1);
+    } else {
+      nextIndex = Math.min(totalItems - 1, activeDot + 1);
+    }
+    scrollToIdx(nextIndex);
+  };
+
+  const scrollToIdx = (idx: number) => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const card = container.children[idx] as HTMLElement;
+    if (!card) return;
+    
+    const paddingLeft = parseFloat(window.getComputedStyle(container).paddingLeft) || 0;
+    const targetScrollLeft = card.offsetLeft - paddingLeft;
+    
+    container.scrollTo({
+      left: targetScrollLeft,
+      behavior: 'smooth'
+    });
+    setActiveDot(idx);
+  };
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const scrollLeft = container.scrollLeft;
+    
+    const paddingLeft = parseFloat(window.getComputedStyle(container).paddingLeft) || 0;
+    const targetLine = scrollLeft + paddingLeft;
+    
+    let closestIndex = 0;
+    let minDistance = Infinity;
+    
+    for (let i = 0; i < container.children.length; i++) {
+      const card = container.children[i] as HTMLElement;
+      if (!card) continue;
+      const distance = Math.abs(card.offsetLeft - targetLine);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    }
+    
+    setActiveDot(closestIndex);
   };
 
   return (
@@ -177,42 +237,106 @@ export default function ServiceDetail({ currentHash }: ServiceDetailProps) {
             </p>
           </div>
 
-          {/* Offerings Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch justify-center">
+          {/* Offerings Scroll Track */}
+          <div 
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="relative flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none scroll-smooth pb-4 px-4 sm:px-0"
+          >
             {detail.offerings.map((offering, idx) => (
               <div 
                 key={idx}
-                className="bg-white border border-slate-100 rounded-3xl p-5 flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group"
+                className="w-[85vw] sm:w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] flex-shrink-0 snap-start bg-[#f4f5f7] rounded-[32px] p-6 pb-8 flex flex-col items-center text-center justify-between shadow-none hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 group border border-transparent hover:border-slate-200/50"
               >
-                {/* Offering Image */}
-                <div className="w-full h-44 rounded-2xl overflow-hidden border border-slate-100 bg-slate-50 mb-5 relative">
+                {/* Offering Image Container */}
+                <div className="w-full aspect-[4/3] rounded-[24px] overflow-hidden bg-slate-200/40 mb-6 flex items-center justify-center relative p-1.5">
                   <img 
                     src={offering.image} 
                     alt={offering.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    className="w-full h-full object-cover rounded-[18px] group-hover:scale-105 transition-transform duration-500" 
                   />
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 flex flex-col justify-between">
+                {/* Content Details */}
+                <div className="flex-1 flex flex-col items-center justify-between w-full">
                   <div>
-                    <h3 className="font-extrabold text-lg text-slate-800 leading-snug group-hover:text-brand-600 transition-colors">
+                    <h3 className="font-jakarta font-extrabold text-base sm:text-[1.05rem] text-slate-900 mb-2 leading-snug group-hover:text-brand-600 transition-colors">
                       {offering.title}
                     </h3>
-                    <p className="text-slate-500 text-xs mt-3 leading-relaxed">
+                    <p className="text-slate-500 text-[0.82rem] leading-relaxed mb-6 font-medium max-w-[210px] mx-auto">
                       {offering.desc}
                     </p>
                   </div>
 
                   <button 
                     onClick={handleScrollToForm}
-                    className="w-full mt-6 py-3 bg-slate-950 text-white rounded-xl text-xs font-extrabold hover:bg-brand-600 shadow-sm transition-all cursor-pointer"
+                    className="px-7 py-2.5 bg-slate-950 hover:bg-brand-600 text-white text-[0.72rem] font-extrabold rounded-full transition-all tracking-wider shadow-sm cursor-pointer transform active:scale-95 inline-block"
                   >
                     {offering.btnText}
                   </button>
                 </div>
               </div>
             ))}
+            {/* Spacer to allow scrolling the last cards to the left edge on desktop/tablet */}
+            <div className="hidden sm:block sm:w-[calc((100%-24px)/2)] md:w-[calc(2*(100%-48px)/3+24px)] flex-shrink-0 pointer-events-none" />
+          </div>
+
+          {/* Carousel Navigation Controls */}
+          <div className="flex flex-col items-center justify-center gap-4 mt-10">
+            <div className="flex items-center gap-6">
+              <button 
+                onClick={() => scroll('left')}
+                disabled={activeDot === 0}
+                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-sm active:scale-95 ${
+                  activeDot === 0 
+                    ? 'bg-slate-100 text-slate-300 cursor-not-allowed opacity-50' 
+                    : 'bg-[#f4f5f7] hover:bg-slate-200 text-slate-800 cursor-pointer hover:shadow-md'
+                }`}
+                aria-label="Previous slide"
+              >
+                <svg className="w-5 h-5 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              <span className="text-sm font-jakarta font-extrabold text-slate-700 bg-slate-100/80 px-4 py-1.5 rounded-full select-none shadow-sm min-w-[70px] text-center">
+                {activeDot + 1} / {detail.offerings.length}
+              </span>
+
+              <button 
+                onClick={() => scroll('right')}
+                disabled={activeDot === detail.offerings.length - 1}
+                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-sm active:scale-95 ${
+                  activeDot === detail.offerings.length - 1 
+                    ? 'bg-slate-100 text-slate-300 cursor-not-allowed opacity-50' 
+                    : 'bg-[#f4f5f7] hover:bg-slate-200 text-slate-800 cursor-pointer hover:shadow-md'
+                }`}
+                aria-label="Next slide"
+              >
+                <svg className="w-5 h-5 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex items-center gap-0.5">
+              {detail.offerings.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollToIdx(idx)}
+                  className="p-2 cursor-pointer outline-none group"
+                  aria-label={`Go to slide ${idx + 1}`}
+                >
+                  <div
+                    className={`transition-all duration-300 h-2.5 rounded-full ${
+                      activeDot === idx 
+                        ? 'bg-slate-800 w-7' 
+                        : 'bg-slate-200 group-hover:bg-slate-300 w-2.5'
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
           </div>
 
         </div>
