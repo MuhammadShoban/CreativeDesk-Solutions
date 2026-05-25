@@ -13,12 +13,12 @@ const cols = [
       'AI Automations'
     ],
     hrefs: [
-      '#/services/custom-software',
-      '#/services/saas-prebuilt',
-      '#/services/website-development',
-      '#/services/mobile-apps-development',
-      '#/services/software-maintenance',
-      '#/services/ai-automations'
+      '/services/custom-software',
+      '/services/saas-prebuilt',
+      '/services/website-development',
+      '/services/mobile-apps-development',
+      '/services/software-maintenance',
+      '/services/ai-automations'
     ],
   },
   {
@@ -31,11 +31,11 @@ const cols = [
       'Cost Estimator'
     ],
     hrefs: [
-      '#why-us',
-      '#process',
-      '#testimonials',
-      '#video-showcase',
-      '#estimator'
+      '/#why-us',
+      '/#process',
+      '/#testimonials',
+      '/#video-showcase',
+      '/#estimator'
     ],
   },
   {

@@ -71,37 +71,37 @@ const challengesList = [
     icon: <IconRevenueCoins />,
     title: "Slow Business Operations",
     solution: "Custom Software",
-    detailHash: "#/services/custom-software"
+    detailPath: "/services/custom-software"
   },
   {
     icon: <IconLeadFunnel />,
     title: "High SaaS Launch Costs",
     solution: "SaaS Prebuilt Platforms",
-    detailHash: "#/services/saas-prebuilt"
+    detailPath: "/services/saas-prebuilt"
   },
   {
     icon: <IconSearchMaps />,
     title: "No Website & Losing Customers",
     solution: "Website Development",
-    detailHash: "#/services/website-development"
+    detailPath: "/services/website-development"
   },
   {
     icon: <IconGoogleReviews />,
     title: "Missing Sales Opportunities",
     solution: "Mobile Apps Development",
-    detailHash: "#/services/mobile-apps-development"
+    detailPath: "/services/mobile-apps-development"
   },
   {
     icon: <IconBrowserOutdated />,
     title: "Server Downtime & Security Gaps",
     solution: "Software Maintenance",
-    detailHash: "#/services/software-maintenance"
+    detailPath: "/services/software-maintenance"
   },
   {
     icon: <IconCostPerLead />,
     title: "Time Wasted on Manual Work",
     solution: "AI & Workflow Automations",
-    detailHash: "#/services/ai-automations"
+    detailPath: "/services/ai-automations"
   },
 ];
 
@@ -158,7 +158,10 @@ export default function Challenges() {
           {challengesList.map((challenge, idx) => (
             <div
               key={idx}
-              onClick={() => { window.location.hash = challenge.detailHash; }}
+              onClick={() => {
+                window.history.pushState(null, '', challenge.detailPath);
+                window.dispatchEvent(new Event('popstate'));
+              }}
               className="bg-white/90 backdrop-blur-xl border border-slate-100 rounded-2xl p-4 sm:p-5 py-6 sm:py-8 flex flex-col items-center justify-between text-center
                          transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(124,58,237,0.12)]
                          hover:border-brand-200 group cursor-pointer"

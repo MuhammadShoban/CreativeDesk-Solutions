@@ -53,28 +53,28 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
         desc: 'Real-time reporting on operations, financial metrics, and user analytics with granular export features.',
         image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80',
         btnText: 'View Mockup',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Bespoke Admin Panel',
         desc: 'Manage users, permissions, logs, settings, and workflows without touching a single line of code.',
         image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=500&q=80',
         btnText: 'Explore System',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Core Backend APIs',
         desc: 'High-throughput, fully documented RESTful and GraphQL APIs built with rock-solid server-side logic.',
         image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=80',
         btnText: 'See Docs',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Database Architectures',
         desc: 'Relational and document databases optimized with indexing, partition, and automated backup pipelines.',
         image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=500&q=80',
         btnText: 'Database Specs',
-        link: '#/contact'
+        link: '/contact'
       }
     ],
     whyChooseUsTitle: 'Why Choose CreativeDesk?',
@@ -115,42 +115,42 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
         desc: 'Dedicated panel for store owners to manage inventories, view orders, track income, and arrange payouts.',
         image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80',
         btnText: 'Check Out',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Powerful Admin Panel',
         desc: 'System control center to manage commissions, payments, vendors, users, and review insights.',
         image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=500&q=80',
         btnText: 'Check Out',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Customer Android & iOS App',
         desc: 'Feature-rich native mobile applications for customers with address locators, cart flows, and live tracking.',
         image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=500&q=80',
         btnText: 'Download Now',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Responsive Web Storefront',
         desc: 'Gorgeous customer web application with fast indexing, payment integrations, and dynamic searching.',
         image: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=500&q=80',
         btnText: 'Explore Demo',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Delivery Boy App & Panel',
         desc: 'Dedicated mobile workflow for riders to accept shipments, manage drop-offs, and trace earning histories.',
         image: 'https://images.unsplash.com/photo-1526367790999-015078648c7e?auto=format&fit=crop&w=500&q=80',
         btnText: 'Check Out',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Partner App Manager',
         desc: 'Mobile manager allowing merchant managers to adjust stock, modify prices, and process orders on the fly.',
         image: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=500&q=80',
         btnText: 'Download Now',
-        link: '#/contact'
+        link: '/contact'
       }
     ],
     whyChooseUsTitle: 'Why Choose Our Prebuilt SaaS?',
@@ -191,28 +191,28 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
         desc: 'Server-side rendered and static websites offering unmatched loading speed and interactive layout.',
         image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=500&q=80',
         btnText: 'View Showcase',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Headless CMS Architecture',
         desc: 'Allow your team to publish blogs, update portfolios, and edit copy easily without code edits.',
         image: 'https://images.unsplash.com/photo-1545670723-196ed0954986?auto=format&fit=crop&w=500&q=80',
         btnText: 'See Configs',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Modern E-Commerce Storefronts',
         desc: 'Lightning-fast product checkouts, dynamic cart models, and secure payment integrations.',
         image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=500&q=80',
         btnText: 'Launch Shop',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Conversion Landing Pages',
         desc: 'Tailored single-page funnel sites engineered with clear call-to-actions, hooks, and high copy layouts.',
         image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80',
         btnText: 'Boost Leads',
-        link: '#/contact'
+        link: '/contact'
       }
     ],
     whyChooseUsTitle: 'Why Choose CreativeDesk Websites?',
@@ -253,28 +253,28 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
         desc: 'Stunning single-codebase application with native rendering speed, custom widgets, and smooth layouts.',
         image: 'https://images.unsplash.com/photo-1617042375876-a13e36732a04?auto=format&fit=crop&w=500&q=80',
         btnText: 'See Mockup',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'React Native Apps',
         desc: 'Highly modular applications incorporating native components for immediate UI response and fast updates.',
         image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=500&q=80',
         btnText: 'View Tech',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Store Publishing Support',
         desc: 'Complete assistance setting up Apple Developer accounts, preparing store listings, assets, and passing review.',
         image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80',
         btnText: 'App Store Specs',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Offline-First Database',
         desc: 'Local state caching so your customers can browse catalogues, add notes, and check profiles without internet.',
         image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=80',
         btnText: 'Database Specs',
-        link: '#/contact'
+        link: '/contact'
       }
     ],
     whyChooseUsTitle: 'Why Choose Our Mobile Apps?',
@@ -315,28 +315,28 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
         desc: 'Uptime trackers, latency alerts, CPU usage logs, and automated script re-runs.',
         image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=500&q=80',
         btnText: 'View Logs Flow',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Continuous Data Backups',
         desc: 'Daily encrypted backups stored on multiple cloud locations to ensure zero data loss.',
         image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=500&q=80',
         btnText: 'See Safety Specs',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Security Audits & Patches',
         desc: 'Continuous package updates, SQL injection checks, dependency auditing, and SSL management.',
         image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=500&q=80',
         btnText: 'Auditing Flow',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Database Tune-ups',
         desc: 'Query auditing, database indexing, log clearing, and server storage cleanup cycles.',
         image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=500&q=80',
         btnText: 'Database Specs',
-        link: '#/contact'
+        link: '/contact'
       }
     ],
     whyChooseUsTitle: 'Why Choose Our Support Plan?',
@@ -377,28 +377,28 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
         desc: 'AI customer assistants fed with your company databases to answer client queries accurately.',
         image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&w=500&q=80',
         btnText: 'Test Bot',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Zapier & n8n Workflows',
         desc: 'Seamless data sharing across CRM, Google Sheets, Slack, Stripe, email systems, and custom APIs.',
         image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80',
         btnText: 'Explore Workflows',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Document Data Extraction',
         desc: 'Autonomous reading and categorization of invoices, emails, receipts, and user PDFs into databases.',
         image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=500&q=80',
         btnText: 'Run Extraction',
-        link: '#/contact'
+        link: '/contact'
       },
       {
         title: 'Semantic Data Search',
         desc: 'Build smart internal search tools that understand user search intent instead of just keywords.',
         image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=500&q=80',
         btnText: 'Try Search',
-        link: '#/contact'
+        link: '/contact'
       }
     ],
     whyChooseUsTitle: 'Why Automate with CreativeDesk?',

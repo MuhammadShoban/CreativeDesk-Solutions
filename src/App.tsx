@@ -32,31 +32,106 @@ function SectionSkeleton() {
   );
 }
 
-function getPageFromHash(hash: string) {
-  const cleanHash = hash.replace(/^#\/?/, '');
-  if (cleanHash.startsWith('services/')) return 'service-detail';
-  if (cleanHash === 'services') return 'services';
-  if (cleanHash === 'about' || cleanHash === 'process') return 'about';
-  if (cleanHash === 'portfolio') return 'portfolio';
-  if (cleanHash === 'contact') return 'contact';
-  if (cleanHash === 'top-projects') return 'top-projects';
+function getPageFromPath(path: string) {
+  const cleanPath = path.replace(/^\/+/, '').replace(/\/+$/, '');
+  if (cleanPath.startsWith('services/')) return 'service-detail';
+  if (cleanPath === 'services') return 'services';
+  if (cleanPath === 'about' || cleanPath === 'process') return 'about';
+  if (cleanPath === 'portfolio') return 'portfolio';
+  if (cleanPath === 'contact') return 'contact';
+  if (cleanPath === 'top-projects') return 'top-projects';
   return 'home';
 }
 
 function App() {
-  const [currentHash, setCurrentHash] = useState(window.location.hash || '#/');
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   useEffect(() => {
-    const handleHashChange = () => {
-      setCurrentHash(window.location.hash || '#/');
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
       window.scrollTo(0, 0);
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleLocationChange);
+
+    // Intercept local link clicks globally for a smooth SPA routing experience
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      if (
+        anchor &&
+        anchor.href &&
+        (anchor.getAttribute('href')?.startsWith('/') || anchor.getAttribute('href')?.startsWith('#')) &&
+        !anchor.getAttribute('target') &&
+        !e.defaultPrevented &&
+        e.button === 0 && // Left click only
+        !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey // No modifier keys
+      ) {
+        const href = anchor.getAttribute('href') || '/';
+        
+        // Handle pure hash links like #estimator
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          window.history.pushState(null, '', `/${href}`);
+          window.dispatchEvent(new Event('popstate'));
+          const el = document.getElementById(href.substring(1));
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+          return;
+        }
+
+        const [path, hash] = href.split('#');
+        const currentPathname = window.location.pathname;
+
+        if (path === currentPathname || (path === '/' && currentPathname === '/')) {
+          // Same page, just let hash scroll happen if present
+          if (hash) {
+            e.preventDefault();
+            window.history.pushState(null, '', href);
+            window.dispatchEvent(new Event('popstate'));
+            const el = document.getElementById(hash);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }
+          } else {
+            e.preventDefault();
+            window.history.pushState(null, '', href);
+            window.dispatchEvent(new Event('popstate'));
+          }
+        } else {
+          e.preventDefault();
+          window.history.pushState(null, '', href);
+          window.dispatchEvent(new Event('popstate'));
+        }
+      }
+    };
+
+    document.addEventListener('click', handleGlobalClick);
+
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      document.removeEventListener('click', handleGlobalClick);
+    };
   }, []);
 
-  const activePage = getPageFromHash(currentHash);
+  useEffect(() => {
+    // Scroll to section on route load if hash exists
+    const hash = window.location.hash || window.location.href.split('#')[1];
+    if (hash) {
+      const cleanHash = hash.replace(/^#\/?/, '');
+      if (cleanHash) {
+        setTimeout(() => {
+          const el = document.getElementById(cleanHash);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 150);
+      }
+    }
+  }, [currentPath]);
+
+  const activePage = getPageFromPath(currentPath);
 
   return (
     <>
@@ -154,7 +229,7 @@ function App() {
 
         {activePage === 'service-detail' && (
           <Suspense fallback={<SectionSkeleton />}>
-            <ServiceDetail currentHash={currentHash} />
+            <ServiceDetail currentPath={currentPath} />
           </Suspense>
         )}
       </main>

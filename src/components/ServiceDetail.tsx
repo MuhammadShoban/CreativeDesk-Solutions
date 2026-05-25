@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { serviceDetails } from '../data/serviceDetails';
 
 interface ServiceDetailProps {
-  currentHash: string;
+  currentPath: string;
 }
 
-export default function ServiceDetail({ currentHash }: ServiceDetailProps) {
-  // Parse hash to get the service ID (e.g. #/services/custom-software -> custom-software)
-  const cleanHash = currentHash.replace(/^#\/?/, '');
-  const serviceId = cleanHash.split('/')[1] || '';
+export default function ServiceDetail({ currentPath }: ServiceDetailProps) {
+  // Parse path to get the service ID (e.g. /services/custom-software -> custom-software)
+  const cleanPath = currentPath.replace(/^\/+/, '').replace(/\/+$/, '');
+  const serviceId = cleanPath.split('/')[1] || '';
   const detail = serviceDetails[serviceId];
 
   // Carousel Ref & State
@@ -26,7 +26,7 @@ export default function ServiceDetail({ currentHash }: ServiceDetailProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  // Scroll to top on page load/hash change
+  // Scroll to top on page load/path change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     if (scrollRef.current) {
@@ -40,7 +40,7 @@ export default function ServiceDetail({ currentHash }: ServiceDetailProps) {
       <div className="pt-40 pb-20 text-center min-h-[60vh] flex flex-col items-center justify-center bg-slate-50">
         <h2 className="text-2xl font-bold text-slate-800">Service Not Found</h2>
         <p className="text-slate-500 mt-2">The requested service detail page could not be located.</p>
-        <a href="#/services" className="btn-primary mt-6">Back to Services</a>
+        <a href="/services" className="btn-primary mt-6">Back to Services</a>
       </div>
     );
   }
@@ -143,7 +143,7 @@ export default function ServiceDetail({ currentHash }: ServiceDetailProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           {/* Breadcrumb back link */}
           <div className="mb-6 flex justify-center">
-            <a href="#/services" className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate-400 hover:text-brand-600 transition-colors">
+            <a href="/services" className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate-400 hover:text-brand-600 transition-colors">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
               </svg>
@@ -186,7 +186,7 @@ export default function ServiceDetail({ currentHash }: ServiceDetailProps) {
               {detail.ctaText}
             </button>
             <a 
-              href="#/portfolio"
+              href="/portfolio"
               className="px-8 py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs sm:text-sm rounded-full transition-all"
             >
               View Portfolio

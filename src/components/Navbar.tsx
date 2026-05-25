@@ -3,17 +3,17 @@ import logoImg from '../assets/logo.png';
 import { IconMenu, IconX } from './Icons';
 
 const navLinks = [
-  { label: 'Home',         href: '#/' },
-  { label: 'Services',     href: '#/services' },
-  { label: 'About',        href: '#/about' },
-  { label: 'Portfolio',    href: '#/portfolio' },
-  { label: 'Contact',      href: '#/contact' },
+  { label: 'Home',         href: '/' },
+  { label: 'Services',     href: '/services' },
+  { label: 'About',        href: '/about' },
+  { label: 'Portfolio',    href: '/portfolio' },
+  { label: 'Contact',      href: '/contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [currentHash, setCurrentHash] = useState(window.location.hash || '#/');
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -22,16 +22,16 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const handleHashChange = () => {
-      setCurrentHash(window.location.hash || '#/');
+    const handlePathChange = () => {
+      setCurrentPath(window.location.pathname);
     };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handlePathChange);
+    return () => window.removeEventListener('popstate', handlePathChange);
   }, []);
 
   const isActive = (href: string) => {
-    const cleanCurrent = currentHash.replace(/^#\/?/, '');
-    const cleanHref = href.replace(/^#\/?/, '');
+    const cleanCurrent = currentPath.replace(/^\/+/, '').replace(/\/+$/, '');
+    const cleanHref = href.replace(/^\/+/, '').replace(/\/+$/, '');
     if (cleanCurrent === '' && cleanHref === '') return true;
     if (cleanHref === 'services' && cleanCurrent.startsWith('services')) return true;
     return cleanCurrent === cleanHref;
@@ -65,7 +65,7 @@ export default function Navbar() {
         >
           {/* ── Left: Logo Mark + Text ── */}
           <a
-            href="#/"
+            href="/"
             className="flex items-center gap-2 sm:gap-3 group select-none flex-shrink-0"
             aria-label="CreativeDesk Solutions Home"
           >
@@ -123,7 +123,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-6 xl:gap-9 flex-shrink-0">
             <span className="w-px h-5 bg-brand-100" />
             <a
-              href="#/contact"
+              href="/contact"
               className="inline-flex items-center gap-2 px-4 xl:px-5 py-2.5 rounded-full
                          font-jakarta font-bold text-[0.85rem] xl:text-[0.9rem] text-white whitespace-nowrap
                          transition-all duration-300 hover:-translate-y-px"
@@ -194,7 +194,7 @@ export default function Navbar() {
           {/* CTA button */}
           <div className="px-6 mt-8">
             <a
-              href="#/contact"
+              href="/contact"
               onClick={() => setMenuOpen(false)}
               className="flex items-center justify-center gap-2 py-4 rounded-2xl
                          font-jakarta font-bold text-lg text-white w-full"

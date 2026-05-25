@@ -23,7 +23,7 @@ export default function Services({ isPage = false }: ServicesProps) {
       btnBg: 'bg-brand-gradient hover:brightness-110',
       image: customSoftwareImg,
       bullets: ['Custom Enterprise Apps', 'Tailored Business Logic', 'Database Architectures', 'Scalable Backend APIs'],
-      detailHash: '#/services/custom-software'
+      detailPath: '/services/custom-software'
     },
     {
       title: 'SaaS Prebuilt',
@@ -33,7 +33,7 @@ export default function Services({ isPage = false }: ServicesProps) {
       btnBg: 'bg-emerald-600 hover:bg-emerald-700',
       image: saasPrebuiltImg,
       bullets: ['Multivendor Platforms', 'Fully Configured Apps', 'Ready to Launch Suite', 'Free Deploy Support'],
-      detailHash: '#/services/saas-prebuilt'
+      detailPath: '/services/saas-prebuilt'
     },
     {
       title: 'Website Development',
@@ -43,7 +43,7 @@ export default function Services({ isPage = false }: ServicesProps) {
       btnBg: 'bg-blue-600 hover:bg-blue-700',
       image: websiteDevImg,
       bullets: ['Next.js & React Frontends', 'Headless CMS Configs', 'Speed & Web Vitals', 'Technical SEO Setup'],
-      detailHash: '#/services/website-development'
+      detailPath: '/services/website-development'
     },
     {
       title: 'Mobile Apps Development',
@@ -53,7 +53,7 @@ export default function Services({ isPage = false }: ServicesProps) {
       btnBg: 'bg-rose-600 hover:bg-rose-700',
       image: mobileAppsImg,
       bullets: ['Cross-platform Flutter/RN', 'Apple & Google Play launch', 'Frictionless Gestures/UI', 'Offline-first Storage'],
-      detailHash: '#/services/mobile-apps-development'
+      detailPath: '/services/mobile-apps-development'
     },
     {
       title: 'Software Maintenance',
@@ -63,7 +63,7 @@ export default function Services({ isPage = false }: ServicesProps) {
       btnBg: 'bg-amber-600 hover:bg-amber-700',
       image: softwareMaintImg,
       bullets: ['24/7 Server Monitoring', 'Security Patches & Audits', 'Database Backups', 'Framework Version Upgrades'],
-      detailHash: '#/services/software-maintenance'
+      detailPath: '/services/software-maintenance'
     },
     {
       title: 'AI Automations',
@@ -73,7 +73,7 @@ export default function Services({ isPage = false }: ServicesProps) {
       btnBg: 'bg-sky-600 hover:bg-sky-700',
       image: aiAutomationsImg,
       bullets: ['Custom RAG Systems', 'Zapier & n8n Workflows', 'Agentic Chatbots', 'Data Extraction APIs'],
-      detailHash: '#/services/ai-automations'
+      detailPath: '/services/ai-automations'
     }
   ];
 
@@ -128,7 +128,10 @@ export default function Services({ isPage = false }: ServicesProps) {
           {cards.map((c, i) => (
             <div 
               key={i} 
-              onClick={() => { window.location.hash = c.detailHash; }}
+              onClick={() => {
+                window.history.pushState(null, '', c.detailPath);
+                window.dispatchEvent(new Event('popstate'));
+              }}
               className="uiverse-card rounded-[28px] flex flex-col relative transition-all duration-500 hover:-translate-y-3.5 hover:scale-[1.035] group hover:shadow-2xl cursor-pointer"
             >
               {/* Animated blob with service color */}
@@ -176,7 +179,11 @@ export default function Services({ isPage = false }: ServicesProps) {
 
                   {/* Action Button */}
                   <button 
-                    onClick={() => { window.location.hash = c.detailHash; }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.history.pushState(null, '', c.detailPath);
+                      window.dispatchEvent(new Event('popstate'));
+                    }}
                     className={`w-full mt-2 py-3.5 text-white rounded-xl text-xs font-jakarta font-extrabold shadow-sm transition-all cursor-pointer ${c.btnBg}`}>
                     {c.btnText}
                   </button>

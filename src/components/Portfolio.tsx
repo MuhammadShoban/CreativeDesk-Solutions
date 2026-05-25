@@ -88,7 +88,7 @@ export default function Portfolio({ isPage = false }: PortfolioProps) {
         {/* View All Button */}
         <div className="mt-16 text-center">
           <a
-            href="#/top-projects"
+            href="/top-projects"
             className="inline-flex items-center justify-center px-10 py-3 rounded-full border border-black text-black bg-white hover:bg-black hover:text-white transition-all duration-300 font-jakarta font-bold text-sm shadow-sm"
           >
             View All
