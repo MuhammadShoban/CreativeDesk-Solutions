@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 
-export default function WhyUs() {
+interface WhyUsProps {
+  isPage?: boolean;
+}
+
+export default function WhyUs({ isPage = false }: WhyUsProps) {
   const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
@@ -10,7 +14,7 @@ export default function WhyUs() {
   }, []);
 
   return (
-    <section id="why-us" className="why-us-grid-wrapper py-16 md:py-24 relative overflow-hidden">
+    <section id="why-us" className={`why-us-grid-wrapper pb-16 md:pb-24 relative overflow-hidden ${isPage ? 'pt-32 md:pt-40' : 'py-16 md:py-24'}`}>
       
       {/* Gautammsharma Uiverse Grid Background */}
       <div className="why-us-grid-background" />

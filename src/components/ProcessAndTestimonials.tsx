@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-export function Process() {
+interface ProcessProps {
+  isPage?: boolean;
+}
+
+export function Process({ isPage = false }: ProcessProps) {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const steps = [
     {
@@ -74,7 +78,7 @@ export function Process() {
   ];
 
   return (
-    <section id="process" className="pipeline-grid-wrapper pt-20 sm:pt-32 pb-20 sm:pb-32 relative overflow-hidden">
+    <section id="process" className={`pipeline-grid-wrapper pb-20 sm:pb-32 relative overflow-hidden ${isPage ? 'pt-32 sm:pt-44' : 'pt-20 sm:pt-32'}`}>
       {/* Uiverse Custom Grid Background */}
       <div className="pipeline-grid-background" />
 

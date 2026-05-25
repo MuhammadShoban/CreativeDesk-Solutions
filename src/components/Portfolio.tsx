@@ -1,8 +1,12 @@
 import { projects } from '../data/content';
 
-export default function Portfolio() {
+interface PortfolioProps {
+  isPage?: boolean;
+}
+
+export default function Portfolio({ isPage = false }: PortfolioProps) {
   return (
-    <section id="portfolio" className="py-20 sm:py-28 relative overflow-hidden bg-gray-50">
+    <section id="portfolio" className={`relative overflow-hidden bg-gray-50 ${isPage ? 'pt-32 sm:pt-40 pb-20 sm:pb-28' : 'py-20 sm:py-28'}`}>
       
       {/* Uiverse Projects Polka Dot Background */}
       <div className="projects-polka-background" />
@@ -84,7 +88,7 @@ export default function Portfolio() {
         {/* View All Button */}
         <div className="mt-16 text-center">
           <a
-            href="#top-projects"
+            href="#/top-projects"
             className="inline-flex items-center justify-center px-10 py-3 rounded-full border border-black text-black bg-white hover:bg-black hover:text-white transition-all duration-300 font-jakarta font-bold text-sm shadow-sm"
           >
             View All

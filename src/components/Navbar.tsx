@@ -3,22 +3,38 @@ import logoImg from '../assets/logo.png';
 import { IconMenu, IconX } from './Icons';
 
 const navLinks = [
-  { label: 'Home',         href: '#' },
-  { label: 'Services',     href: '#services' },
-  { label: 'About',        href: '#process' },
-  { label: 'Portfolio',    href: '#portfolio' },
-  { label: 'Contact',      href: '#contact' },
+  { label: 'Home',         href: '#/' },
+  { label: 'Services',     href: '#/services' },
+  { label: 'About',        href: '#/about' },
+  { label: 'Portfolio',    href: '#/portfolio' },
+  { label: 'Contact',      href: '#/contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [currentHash, setCurrentHash] = useState(window.location.hash || '#/');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash || '#/');
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const isActive = (href: string) => {
+    const cleanCurrent = currentHash.replace(/^#\/?/, '');
+    const cleanHref = href.replace(/^#\/?/, '');
+    if (cleanCurrent === '' && cleanHref === '') return true;
+    return cleanCurrent === cleanHref;
+  };
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -48,7 +64,7 @@ export default function Navbar() {
         >
           {/* ── Left: Logo Mark + Text ── */}
           <a
-            href="#"
+            href="#/"
             className="flex items-center gap-2 sm:gap-3 group select-none flex-shrink-0"
             aria-label="CreativeDesk Solutions Home"
           >
@@ -90,13 +106,14 @@ export default function Navbar() {
               <a
                 key={l.href}
                 href={l.href}
-                className="font-jakarta font-semibold text-[0.9rem] xl:text-[1rem] text-slate-600
-                           hover:text-brand-700 transition-colors duration-150
-                           relative group whitespace-nowrap"
+                className={`font-jakarta font-semibold text-[0.9rem] xl:text-[1rem] transition-colors duration-150
+                           relative group whitespace-nowrap
+                           ${isActive(l.href) ? 'text-brand-700' : 'text-slate-600 hover:text-brand-700'}`}
               >
                 {l.label}
-                <span className="absolute -bottom-0.5 left-0 h-[2px] w-0 bg-brand-500
-                                 rounded-full transition-all duration-200 group-hover:w-full" />
+                <span className={`absolute -bottom-0.5 left-0 h-[2px] bg-brand-500
+                                 rounded-full transition-all duration-200 group-hover:w-full
+                                 ${isActive(l.href) ? 'w-full' : 'w-0'}`} />
               </a>
             ))}
           </div>
@@ -105,7 +122,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-6 xl:gap-9 flex-shrink-0">
             <span className="w-px h-5 bg-brand-100" />
             <a
-              href="#contact"
+              href="#/contact"
               className="inline-flex items-center gap-2 px-4 xl:px-5 py-2.5 rounded-full
                          font-jakarta font-bold text-[0.85rem] xl:text-[0.9rem] text-white whitespace-nowrap
                          transition-all duration-300 hover:-translate-y-px"
@@ -161,9 +178,9 @@ export default function Navbar() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setMenuOpen(false)}
-                className="font-jakarta font-bold text-xl text-slate-800
-                           hover:text-brand-600 transition-colors py-4
-                           border-b border-slate-100 last:border-0 flex items-center justify-between group"
+                className={`font-jakarta font-bold text-xl transition-colors py-4
+                           border-b border-slate-100 last:border-0 flex items-center justify-between group
+                           ${isActive(l.href) ? 'text-brand-600' : 'text-slate-800 hover:text-brand-600'}`}
               >
                 {l.label}
                 <svg className="w-4 h-4 text-slate-300 group-hover:text-brand-400 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -176,7 +193,7 @@ export default function Navbar() {
           {/* CTA button */}
           <div className="px-6 mt-8">
             <a
-              href="#contact"
+              href="#/contact"
               onClick={() => setMenuOpen(false)}
               className="flex items-center justify-center gap-2 py-4 rounded-2xl
                          font-jakarta font-bold text-lg text-white w-full"

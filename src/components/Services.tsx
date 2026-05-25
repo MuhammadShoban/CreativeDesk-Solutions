@@ -8,7 +8,11 @@ import mobileAppsImg from '../assets/mobile_apps.png';
 import softwareMaintImg from '../assets/software_maintenance.jpg';
 import aiAutomationsImg from '../assets/ai_automations.png';
 
-export default function Services() {
+interface ServicesProps {
+  isPage?: boolean;
+}
+
+export default function Services({ isPage = false }: ServicesProps) {
   // Unified list of services with imported images
   const cards = [
     {
@@ -68,7 +72,7 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-20 sm:py-28 relative overflow-hidden">
+    <section id="services" className={`relative overflow-hidden ${isPage ? 'pt-32 sm:pt-40 pb-20 sm:pb-28' : 'py-20 sm:py-28'}`}>
 
       {/* ── Multi-layer background (Unchanged theme and bg) ── */}
       <div className="absolute inset-0 -z-10"

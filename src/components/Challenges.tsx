@@ -68,34 +68,34 @@ const IconCostPerLead = () => (
 
 const challengesList = [
   {
-    icon: <IconSearchMaps />,
-    title: 'Not Appearing in Google Maps',
-    solution: 'Web Development & Local SEO',
-  },
-  {
-    icon: <IconBrowserOutdated />,
-    title: 'Website is Old and Outdated',
-    solution: 'React & Next.js Rebuilds',
+    icon: <IconRevenueCoins />,
+    title: "Slow Business Operations",
+    solution: "Custom Software",
   },
   {
     icon: <IconLeadFunnel />,
-    title: 'Need Better Quality Leads',
-    solution: 'AI & Workflow Automations',
+    title: "High SaaS Launch Costs",
+    solution: "SaaS Prebuilt Platforms",
   },
   {
-    icon: <IconRevenueCoins />,
-    title: 'Need More Revenue',
-    solution: 'Custom Enterprise Software',
+    icon: <IconSearchMaps />,
+    title: "No Website & Losing Customers",
+    solution: "Website Development",
   },
   {
     icon: <IconGoogleReviews />,
-    title: 'Need More Google Reviews',
-    solution: 'SaaS Review Integrations',
+    title: "Missing Sales Opportunities",
+    solution: "Mobile Apps Development",
+  },
+  {
+    icon: <IconBrowserOutdated />,
+    title: "Server Downtime & Security Gaps",
+    solution: "Software Maintenance",
   },
   {
     icon: <IconCostPerLead />,
-    title: 'Our Cost Per Lead is Too High',
-    solution: 'High-Converting Landing Pages',
+    title: "Time Wasted on Manual Work",
+    solution: "AI & Workflow Automations",
   },
 ];
 

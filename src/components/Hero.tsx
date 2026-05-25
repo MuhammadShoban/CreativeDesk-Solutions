@@ -85,10 +85,10 @@ export default function Hero() {
 
           {/* CTA Buttons — stack on very small screens */}
           <div className="flex flex-col xs:flex-row items-center justify-center flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-10 w-full px-4 sm:px-0">
-            <a href="#contact" className="btn-primary shadow-[0_4px_24px_rgba(95,41,199,0.35)] flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 text-sm w-full xs:w-auto justify-center">
+            <a href="#/contact" className="btn-primary shadow-[0_4px_24px_rgba(95,41,199,0.35)] flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 text-sm w-full xs:w-auto justify-center">
               Get Started <IconArrow />
             </a>
-            <a href="#services"
+            <a href="#/services"
                className="flex items-center gap-2.5 font-jakarta font-bold text-sm text-slate-800
                           hover:text-brand-700 transition-colors py-2.5 px-4 sm:px-5 rounded-xl bg-white/60 backdrop-blur-sm border border-slate-200/50 shadow-sm w-full xs:w-auto justify-center">
               <span className="w-8 h-8 rounded-full bg-white shadow-brand-sm flex items-center justify-center text-brand-600 border border-brand-100 flex-shrink-0">

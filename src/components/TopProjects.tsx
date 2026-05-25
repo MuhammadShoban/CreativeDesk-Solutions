@@ -144,7 +144,7 @@ export default function TopProjects() {
   const filtered = topProjectsData.filter(p => p.category === activeTab);
 
   const handleBackToMain = () => {
-    window.location.hash = '#portfolio';
+    window.location.hash = '#/portfolio';
   };
 
   return (

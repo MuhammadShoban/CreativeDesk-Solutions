@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { IconMail, IconPhone, IconPin, IconCheck } from './Icons';
 import whatsappIcon from '../assets/whatsapp.png';
 
-export default function Contact() {
+interface ContactProps {
+  isPage?: boolean;
+}
+
+export default function Contact({ isPage = false }: ContactProps) {
   const [form, setForm] = useState({ name:'', email:'', phone:'', service:'web-dev', message:'' });
   const [done, setDone] = useState(false);
 
@@ -22,7 +26,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="pt-24 sm:pt-36 pb-24 sm:pb-36 relative overflow-hidden bg-slate-100">
+    <section id="contact" className={`pb-24 sm:pb-36 relative overflow-hidden bg-slate-100 ${isPage ? 'pt-32 sm:pt-44' : 'pt-24 sm:pt-36'}`}>
       {/* Uiverse Contact Polka Dot Background */}
       <div className="contact-polka-background" />
 

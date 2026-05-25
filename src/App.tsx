@@ -31,46 +31,30 @@ function SectionSkeleton() {
   );
 }
 
+function getPageFromHash(hash: string) {
+  const cleanHash = hash.replace(/^#\/?/, '');
+  if (cleanHash === 'services') return 'services';
+  if (cleanHash === 'about' || cleanHash === 'process') return 'about';
+  if (cleanHash === 'portfolio') return 'portfolio';
+  if (cleanHash === 'contact') return 'contact';
+  if (cleanHash === 'top-projects') return 'top-projects';
+  return 'home';
+}
+
 function App() {
-  const [isTopProjects, setIsTopProjects] = useState(window.location.hash === '#top-projects');
+  const [currentHash, setCurrentHash] = useState(window.location.hash || '#/');
 
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash;
-      const isTopProj = hash === '#top-projects';
-      
-      setIsTopProjects(isTopProj);
-
-      if (isTopProj) {
-        window.scrollTo({ top: 0 });
-      } else if (hash && hash !== '#') {
-        // If navigating to a specific section anchor, scroll to it smoothly
-        setTimeout(() => {
-          const element = document.querySelector(hash);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }, 120);
-      } else {
-        // If Home/Empty hash, scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      setCurrentHash(window.location.hash || '#/');
+      window.scrollTo(0, 0);
     };
 
     window.addEventListener('hashchange', handleHashChange);
-    
-    // Check initial hash on mount
-    if (window.location.hash && window.location.hash !== '#top-projects') {
-      setTimeout(() => {
-        const element = document.querySelector(window.location.hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 500);
-    }
-    
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
+
+  const activePage = getPageFromHash(currentHash);
 
   return (
     <>
@@ -83,11 +67,7 @@ function App() {
       <Navbar />
 
       <main>
-        {isTopProjects ? (
-          <Suspense fallback={<SectionSkeleton />}>
-            <TopProjects />
-          </Suspense>
-        ) : (
+        {activePage === 'home' && (
           <>
             {/* Hero loads synchronously (LCP element) */}
             <Hero />
@@ -133,6 +113,41 @@ function App() {
               <Contact />
             </Suspense>
           </>
+        )}
+
+        {activePage === 'services' && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <Services isPage={true} />
+          </Suspense>
+        )}
+
+        {activePage === 'about' && (
+          <>
+            <Suspense fallback={<SectionSkeleton />}>
+              <WhyUs isPage={true} />
+            </Suspense>
+            <Suspense fallback={<SectionSkeleton />}>
+              <ProcessComp isPage={true} />
+            </Suspense>
+          </>
+        )}
+
+        {activePage === 'portfolio' && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <Portfolio isPage={true} />
+          </Suspense>
+        )}
+
+        {activePage === 'contact' && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <Contact isPage={true} />
+          </Suspense>
+        )}
+
+        {activePage === 'top-projects' && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <TopProjects />
+          </Suspense>
         )}
       </main>
 
