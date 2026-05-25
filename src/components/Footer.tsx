@@ -177,29 +177,38 @@ export default function Footer() {
   return (
     <footer className="bg-slate-950 text-slate-400 pt-14 sm:pt-20 pb-8 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* Top grid: 1 col mobile → 2 col sm → 3 col md → 5 col lg */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.6fr_1fr_1fr_1.1fr_1.5fr] gap-8 sm:gap-10 pb-10 sm:pb-14 border-b border-white/10">
-
           {/* Brand */}
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-3.5">
-              <img src={logoImg} alt="CreativeDesk" className="h-11 w-11 object-contain" />
+              <img
+                src={logoImg}
+                alt="CreativeDesk"
+                className="h-11 w-11 object-contain"
+              />
               {/* Text: mirrors logoDesign.png */}
               <div className="flex flex-col leading-none gap-[3px]">
                 <div className="flex items-baseline gap-0">
-                  <span className="font-jakarta font-bold text-[1rem] tracking-tight text-white/90">CREATIVE</span>
-                  <span className="font-jakarta font-extrabold text-[1rem] tracking-tight text-white">DESK</span>
+                  <span className="font-jakarta font-bold text-[1rem] tracking-tight text-white/90">
+                    CREATIVE
+                  </span>
+                  <span className="font-jakarta font-extrabold text-[1rem] tracking-tight text-white">
+                    DESK
+                  </span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="block w-4 h-px bg-white/30" />
                   <span className="block w-[5px] h-[5px] rounded-full bg-brand-400 flex-shrink-0" />
-                  <span className="font-jakarta font-semibold text-[0.55rem] tracking-[0.22em] text-white/50 uppercase">Solutions</span>
+                  <span className="font-jakarta font-semibold text-[0.55rem] tracking-[0.22em] text-white/50 uppercase">
+                    Solutions
+                  </span>
                 </div>
               </div>
             </div>
             <p className="text-sm leading-relaxed max-w-xs">
-              Creating your digital legacy with enterprise-grade development and intelligent automation.
+              Creating your digital legacy with enterprise-grade development and
+              intelligent automation.
             </p>
             {/* Social & Direct Call Links */}
             <div className="flex flex-wrap gap-2.5 mt-1">
@@ -211,7 +220,7 @@ export default function Footer() {
                 title="Chat on WhatsApp"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.625 1.451 5.403.002 9.803-4.394 9.805-9.795.001-2.617-1.01-5.079-2.862-6.93C16.366 2.03 13.914.993 11.298.993c-5.405 0-9.806 4.399-9.808 9.8.001 1.93.506 3.8 1.462 5.438l-.963 3.52 3.606-.946zm11.573-5.267c-.302-.15-1.786-.882-2.06-.982-.275-.099-.474-.15-.674.15-.2.299-.775.98-.95 1.18-.175.199-.35.224-.652.075-1.127-.565-1.958-.985-2.73-2.312-.199-.343-.199-.556.05-.806.223-.223.3-.35.45-.525.15-.175.2-.299.3-.499.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.589-.493-.51-.674-.519-.175-.009-.375-.01-.575-.01-.2 0-.525.075-.8 3.75.275.3 1.05 1.6 2.525 2.25 1.475.65 2.125.8 2.875.725.75-.075 2.225-.9 2.525-1.775.3-.875.3-1.625.2-1.775-.1-.15-.375-.225-.675-.375z"/>
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.625 1.451 5.403.002 9.803-4.394 9.805-9.795.001-2.617-1.01-5.079-2.862-6.93C16.366 2.03 13.914.993 11.298.993c-5.405 0-9.806 4.399-9.808 9.8.001 1.93.506 3.8 1.462 5.438l-.963 3.52 3.606-.946zm11.573-5.267c-.302-.15-1.786-.882-2.06-.982-.275-.099-.474-.15-.674.15-.2.299-.775.98-.95 1.18-.175.199-.35.224-.652.075-1.127-.565-1.958-.985-2.73-2.312-.199-.343-.199-.556.05-.806.223-.223.3-.35.45-.525.15-.175.2-.299.3-.499.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.589-.493-.51-.674-.519-.175-.009-.375-.01-.575-.01-.2 0-.525.075-.8 3.75.275.3 1.05 1.6 2.525 2.25 1.475.65 2.125.8 2.875.725.75-.075 2.225-.9 2.525-1.775.3-.875.3-1.625.2-1.775-.1-.15-.375-.225-.675-.375z" />
                 </svg>
               </a>
               <a
@@ -222,7 +231,7 @@ export default function Footer() {
                 title="Follow on Instagram"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
                 </svg>
               </a>
               <a
@@ -233,7 +242,7 @@ export default function Footer() {
                 title="Follow on Facebook"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                  <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
                 </svg>
               </a>
               <a
@@ -244,26 +253,14 @@ export default function Footer() {
                 title="Connect on LinkedIn"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                 </svg>
               </a>
-              <a
-                href="https://twitter.com/creativedeskhq"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/5 text-slate-400 hover:text-white flex items-center justify-center transition-all duration-300"
-                title="Follow on X (Twitter)"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
-
             </div>
           </div>
 
           {/* Link columns */}
-          {cols.map(col => (
+          {cols.map((col) => (
             <div key={col.title} className="flex flex-col gap-3">
               <p className="font-jakarta font-bold text-xs uppercase tracking-widest text-white/60 mb-2">
                 {col.title}
@@ -274,7 +271,9 @@ export default function Footer() {
                   href={col.hrefs[i]}
                   onClick={(e) => handleLinkClick(e, col.hrefs[i], l)}
                   className="text-sm hover:text-brand-400 transition-colors duration-150"
-                  {...(col.hrefs[i].startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  {...(col.hrefs[i].startsWith("http")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                 >
                   {l}
                 </a>
@@ -299,23 +298,28 @@ export default function Footer() {
                            text-sm text-white placeholder-slate-500 outline-none
                            focus:border-brand-500 transition-colors"
               />
-              <button className="btn-primary btn-sm flex-shrink-0 whitespace-nowrap">Join</button>
+              <button className="btn-primary btn-sm flex-shrink-0 whitespace-nowrap">
+                Join
+              </button>
             </div>
           </div>
         </div>
 
         {/* Bottom bar — stacks on mobile */}
         <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-3 sm:gap-4 pt-6 sm:pt-8 text-xs">
-          <p>© {new Date().getFullYear()} CreativeDesk Solutions. All Rights Reserved.</p>
+          <p>
+            © {new Date().getFullYear()} CreativeDesk Solutions. All Rights
+            Reserved.
+          </p>
           <div className="flex gap-6">
             <button
-              onClick={() => setActivePolicy('Privacy Policy')}
+              onClick={() => setActivePolicy("Privacy Policy")}
               className="hover:text-brand-400 cursor-pointer transition-colors outline-none"
             >
               Privacy Policy
             </button>
             <button
-              onClick={() => setActivePolicy('Terms of Service')}
+              onClick={() => setActivePolicy("Terms of Service")}
               className="hover:text-brand-400 cursor-pointer transition-colors outline-none"
             >
               Terms of Service
@@ -326,11 +330,11 @@ export default function Footer() {
 
       {/* ── Policy Dialog / Modal ── */}
       {policy && (
-        <div 
+        <div
           className="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4 transition-all duration-300 animate-fade-in"
           onClick={() => setActivePolicy(null)}
         >
-          <div 
+          <div
             className="bg-white rounded-t-3xl sm:rounded-3xl w-full sm:max-w-2xl max-h-[90vh] sm:max-h-[85vh] flex flex-col shadow-2xl border border-slate-100 relative overflow-hidden animate-slide-up"
             onClick={(e) => e.stopPropagation()}
           >
@@ -344,7 +348,7 @@ export default function Footer() {
                   Last Updated: {policy.lastUpdated}
                 </p>
               </div>
-              <button 
+              <button
                 onClick={() => setActivePolicy(null)}
                 className="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center font-bold transition duration-200 outline-none"
               >
@@ -368,7 +372,7 @@ export default function Footer() {
 
             {/* Footer button */}
             <div className="p-6 border-t border-slate-100 flex justify-end bg-slate-50/30">
-              <button 
+              <button
                 onClick={() => setActivePolicy(null)}
                 className="px-6 py-2.5 rounded-full bg-brand-800 text-white font-jakarta font-bold text-sm transition-all duration-200 hover:bg-brand-900 shadow-sm"
               >
