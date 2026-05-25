@@ -21,6 +21,7 @@ const Contact             = lazy(() => import('./components/Contact'));
 const Footer              = lazy(() => import('./components/Footer'));
 const FloatingContact     = lazy(() => import('./components/FloatingContact'));
 const TopProjects         = lazy(() => import('./components/TopProjects'));
+const ServiceDetail       = lazy(() => import('./components/ServiceDetail'));
 
 // ── Lightweight skeleton loader for below-fold sections ──
 function SectionSkeleton() {
@@ -33,6 +34,7 @@ function SectionSkeleton() {
 
 function getPageFromHash(hash: string) {
   const cleanHash = hash.replace(/^#\/?/, '');
+  if (cleanHash.startsWith('services/')) return 'service-detail';
   if (cleanHash === 'services') return 'services';
   if (cleanHash === 'about' || cleanHash === 'process') return 'about';
   if (cleanHash === 'portfolio') return 'portfolio';
@@ -147,6 +149,12 @@ function App() {
         {activePage === 'top-projects' && (
           <Suspense fallback={<SectionSkeleton />}>
             <TopProjects />
+          </Suspense>
+        )}
+
+        {activePage === 'service-detail' && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <ServiceDetail currentHash={currentHash} />
           </Suspense>
         )}
       </main>

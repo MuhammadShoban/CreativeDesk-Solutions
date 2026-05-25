@@ -33,6 +33,7 @@ export default function Navbar() {
     const cleanCurrent = currentHash.replace(/^#\/?/, '');
     const cleanHref = href.replace(/^#\/?/, '');
     if (cleanCurrent === '' && cleanHref === '') return true;
+    if (cleanHref === 'services' && cleanCurrent.startsWith('services')) return true;
     return cleanCurrent === cleanHref;
   };
 

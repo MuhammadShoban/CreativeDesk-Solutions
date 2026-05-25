@@ -5,18 +5,20 @@ const cols = [
   {
     title: 'Services',
     links: [
+      'Custom Software',
+      'SaaS Prebuilt',
       'Website Development',
-      'Mobile App Development',
-      'SLA Maintenance',
-      'Digital Marketing',
+      'Mobile Apps Development',
+      'Software Maintenance',
       'AI Automations'
     ],
     hrefs: [
-      '#services',
-      '#services',
-      '#services',
-      '#services',
-      '#services'
+      '#/services/custom-software',
+      '#/services/saas-prebuilt',
+      '#/services/website-development',
+      '#/services/mobile-apps-development',
+      '#/services/software-maintenance',
+      '#/services/ai-automations'
     ],
   },
   {
