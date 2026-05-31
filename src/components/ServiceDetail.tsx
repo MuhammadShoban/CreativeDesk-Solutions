@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { serviceDetails } from '../data/serviceDetails';
 
+const avatarShriya = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80';
+const avatarAjay = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80';
+const avatarYash = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80';
+
 interface ServiceDetailProps {
   currentPath: string;
 }
@@ -25,6 +29,8 @@ export default function ServiceDetail({ currentPath }: ServiceDetailProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   // Scroll to top on page load/path change
   useEffect(() => {
@@ -33,6 +39,7 @@ export default function ServiceDetail({ currentPath }: ServiceDetailProps) {
       scrollRef.current.scrollTo({ left: 0 });
     }
     setActiveDot(0);
+    setErrorMsg('');
   }, [serviceId]);
 
   if (!detail) {
@@ -54,23 +61,57 @@ export default function ServiceDetail({ currentPath }: ServiceDetailProps) {
   };
 
   // Handle Form Submit
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (honeypotRef.current?.value) return;
+
     setIsSubmitting(true);
-    // Simulate API request
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({
-        fullName: '',
-        phone: '',
-        email: '',
-        brandName: '',
-        message: ''
+    setErrorMsg('');
+
+    try {
+      const accessKey = import.meta.env.VITE_WEB3FORMS_KEY;
+      if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
+        throw new Error('Web3Forms access key is not configured. Please add VITE_WEB3FORMS_KEY to your .env.local file.');
+      }
+
+      const payload = {
+        access_key: accessKey,
+        subject: `New Inquiry for ${detail.title} from ${formData.fullName}`,
+        from_name: 'CreativeDesk Solutions Website',
+        name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        service: detail.title,
+        message: `Brand Name: ${formData.brandName || 'N/A'}\n\nMessage: ${formData.message}`,
+        botcheck: '',
+      };
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
       });
-      // Reset success message after 5s
-      setTimeout(() => setSubmitSuccess(false), 5000);
-    }, 1500);
+
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitSuccess(true);
+        setFormData({
+          fullName: '',
+          phone: '',
+          email: '',
+          brandName: '',
+          message: ''
+        });
+        setTimeout(() => setSubmitSuccess(false), 6000);
+      } else {
+        throw new Error(data.message ?? 'Submission failed. Please try again.');
+      }
+    } catch (err: unknown) {
+      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleScrollToForm = () => {
@@ -196,10 +237,11 @@ export default function ServiceDetail({ currentPath }: ServiceDetailProps) {
           {/* Social Proof */}
           <div className="mt-6 flex justify-center items-center gap-3">
             <div className="flex -space-x-2">
-              <img className="w-8 h-8 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Audience 1" />
-              <img className="w-8 h-8 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Audience 2" />
-              <img className="w-8 h-8 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" alt="Audience 3" />
+              <img className="w-8 h-8 rounded-full border-2 border-white" src={avatarShriya} width="32" height="32" decoding="async" alt="Audience 1" />
+              <img className="w-8 h-8 rounded-full border-2 border-white" src={avatarAjay} width="32" height="32" decoding="async" alt="Audience 2" />
+              <img className="w-8 h-8 rounded-full border-2 border-white" src={avatarYash} width="32" height="32" decoding="async" alt="Audience 3" />
             </div>
+
             <p className="text-xs sm:text-sm font-extrabold text-slate-500">
               Trusted by <span className="text-brand-600 font-bold">50+ Business Owners</span>
             </p>
@@ -243,10 +285,10 @@ export default function ServiceDetail({ currentPath }: ServiceDetailProps) {
             onScroll={handleScroll}
             className="relative flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none scroll-smooth pb-4 px-4 sm:px-0"
           >
-            {detail.offerings.map((offering, idx) => (
+             {detail.offerings.map((offering, idx) => (
               <div 
                 key={idx}
-                className="w-[85vw] sm:w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] flex-shrink-0 snap-start bg-[#f4f5f7] rounded-[32px] p-6 pb-8 flex flex-col items-center text-center justify-between shadow-none hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 group border border-transparent hover:border-slate-200/50"
+                className="w-[85vw] sm:w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] flex-shrink-0 snap-start bg-[#f4f5f7] rounded-[32px] p-6 pb-8 flex flex-col items-center text-center shadow-none hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 group border border-transparent hover:border-slate-200/50"
               >
                 {/* Offering Image Container */}
                 <div className="w-full aspect-[4/3] rounded-[24px] overflow-hidden bg-slate-200/40 mb-6 flex items-center justify-center relative p-1.5">
@@ -258,22 +300,13 @@ export default function ServiceDetail({ currentPath }: ServiceDetailProps) {
                 </div>
 
                 {/* Content Details */}
-                <div className="flex-1 flex flex-col items-center justify-between w-full">
-                  <div>
-                    <h3 className="font-jakarta font-extrabold text-base sm:text-[1.05rem] text-slate-900 mb-2 leading-snug group-hover:text-brand-600 transition-colors">
-                      {offering.title}
-                    </h3>
-                    <p className="text-slate-500 text-[0.82rem] leading-relaxed mb-6 font-medium max-w-[210px] mx-auto">
-                      {offering.desc}
-                    </p>
-                  </div>
-
-                  <button 
-                    onClick={handleScrollToForm}
-                    className="px-7 py-2.5 bg-slate-950 hover:bg-brand-600 text-white text-[0.72rem] font-extrabold rounded-full transition-all tracking-wider shadow-sm cursor-pointer transform active:scale-95 inline-block"
-                  >
-                    {offering.btnText}
-                  </button>
+                <div className="w-full flex-1 flex flex-col justify-center">
+                  <h3 className="font-jakarta font-extrabold text-base sm:text-[1.05rem] text-slate-900 mb-2 leading-snug group-hover:text-brand-600 transition-colors">
+                    {offering.title}
+                  </h3>
+                  <p className="text-slate-500 text-[0.82rem] leading-relaxed font-medium max-w-[210px] mx-auto">
+                    {offering.desc}
+                  </p>
                 </div>
               </div>
             ))}
@@ -484,6 +517,21 @@ export default function ServiceDetail({ currentPath }: ServiceDetailProps) {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot field for spam prevention */}
+                <input
+                  type="text"
+                  name="botcheck"
+                  ref={honeypotRef}
+                  style={{ display: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
+                {errorMsg && (
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-xs sm:text-sm text-rose-800 font-medium">
+                    {errorMsg}
+                  </div>
+                )}
                 
                 {/* Full Name */}
                 <div>
@@ -589,6 +637,41 @@ export default function ServiceDetail({ currentPath }: ServiceDetailProps) {
 
           </div>
 
+        </div>
+      </section>
+
+      {/* ── SEO Text Section ── */}
+      <section className="py-16 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="prose prose-slate max-w-none">
+            <h2 className="font-extrabold text-2xl sm:text-3xl text-slate-800 mb-4 tracking-tight">
+              {detail.seoHeading ?? `${detail.title} — CreativeDesk Solutions`}
+            </h2>
+            <div className="text-slate-500 text-sm sm:text-base leading-relaxed space-y-4">
+              {(detail.seoContent ?? [
+                `CreativeDesk Solutions is a full-service digital agency specializing in ${detail.title.toLowerCase()} for businesses worldwide. Our team of experienced engineers, designers, and strategists delivers results that drive real business growth — on time and within budget.`,
+                `Whether you're a startup launching your first product or an established company scaling your digital presence, we tailor every solution to your specific goals. We combine modern technology stacks with proven development methodologies to ensure your project is built for performance, scalability, and long-term success.`,
+                `We've worked with clients across industries including e-commerce, healthcare, fintech, SaaS, and professional services. Our transparent process means you're always in the loop — from discovery call to final launch and beyond.`,
+                `Ready to get started? Book a free Discovery Call with our team and receive a detailed proposal within 4 business hours. No obligation, no hard sell — just clear, expert advice about what it will take to achieve your goals.`,
+              ]).map((para: string, i: number) => (
+                <p key={i}>{para}</p>
+              ))}
+            </div>
+          </div>
+          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+            <a
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-brand-600 text-white font-extrabold text-sm px-7 py-3.5 rounded-full transition-all"
+            >
+              Get a Free Quote
+            </a>
+            <a
+              href="/blog"
+              className="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 hover:border-brand-300 text-slate-700 font-extrabold text-sm px-7 py-3.5 rounded-full transition-all"
+            >
+              Read Our Blog
+            </a>
+          </div>
         </div>
       </section>
 

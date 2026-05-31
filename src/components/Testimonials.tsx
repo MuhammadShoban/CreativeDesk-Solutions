@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
 
-// Import cropped testimonial card images
-import mukteshImg from '../assets/testimonial_muktesh.png';
-import shriyaImg from '../assets/testimonial_shriya.png';
-import yashImg from '../assets/testimonial_yash.png';
-import ajayImg from '../assets/testimonial_ajay.png';
+// Generic high-quality portrait images from Unsplash
+const mukteshImg = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&h=450&q=80';
+const shriyaImg = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&h=450&q=80';
+const yashImg = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&h=450&q=80';
+const ajayImg = 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&h=450&q=80';
 
 interface TestimonialCard {
   name: string;

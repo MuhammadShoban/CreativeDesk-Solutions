@@ -17,7 +17,7 @@ export default function Services({ isPage = false }: ServicesProps) {
   const cards = [
     {
       title: 'Custom Software',
-      description: 'Monitor your finances live with clear, intuitive dashboards.',
+      description: 'Custom-built digital platforms and business systems designed to automate your workflows, manage company operations, and scale as you grow.',
       blobColor: '#7c3aed',
       btnText: 'Request Custom Quote',
       btnBg: 'bg-brand-gradient hover:brightness-110',
@@ -27,7 +27,7 @@ export default function Services({ isPage = false }: ServicesProps) {
     },
     {
       title: 'SaaS Prebuilt',
-      description: 'Monitor your finances live with clear, intuitive dashboards.',
+      description: 'Ready-to-use business apps like multi-vendor marketplaces, delivery platforms, and booking portals, fully customized and launched in just a few days.',
       blobColor: '#059669',
       btnText: 'Deploy SaaS Solution',
       btnBg: 'bg-emerald-600 hover:bg-emerald-700',
@@ -37,7 +37,7 @@ export default function Services({ isPage = false }: ServicesProps) {
     },
     {
       title: 'Website Development',
-      description: 'Monitor your finances live with clear, intuitive dashboards.',
+      description: 'Stunning, lightning-fast React & Next.js websites designed to capture visitors\' attention, load instantly, and turn traffic into regular customers.',
       blobColor: '#2563eb',
       btnText: 'Request Website Quote',
       btnBg: 'bg-blue-600 hover:bg-blue-700',
@@ -47,7 +47,7 @@ export default function Services({ isPage = false }: ServicesProps) {
     },
     {
       title: 'Mobile Apps Development',
-      description: 'Monitor your finances live with clear, intuitive dashboards.',
+      description: 'High-performance Android and iOS mobile applications designed with smooth scrolling, beautiful graphics, and offline availability.',
       blobColor: '#db2777',
       btnText: 'Build Your App',
       btnBg: 'bg-rose-600 hover:bg-rose-700',
@@ -57,7 +57,7 @@ export default function Services({ isPage = false }: ServicesProps) {
     },
     {
       title: 'Software Maintenance',
-      description: 'Monitor your finances live with clear, intuitive dashboards.',
+      description: 'Uptime monitoring, secure daily backups, regular updates, and instant bug fixes to keep your platforms running smoothly without any interruptions.',
       blobColor: '#d97706',
       btnText: 'Get Maintenance Plan',
       btnBg: 'bg-amber-600 hover:bg-amber-700',
@@ -67,7 +67,7 @@ export default function Services({ isPage = false }: ServicesProps) {
     },
     {
       title: 'AI Automations',
-      description: 'Monitor your finances live with clear, intuitive dashboards.',
+      description: 'Smart AI assistants, custom chatbots, and automated workflows that connect your apps together to eliminate manual tasks and save hours of work.',
       blobColor: '#0284c7',
       btnText: 'Automate Your Flow',
       btnBg: 'bg-sky-600 hover:bg-sky-700',

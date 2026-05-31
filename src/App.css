@@ -296,10 +296,9 @@
   opacity: 0;
   animation: loader-letter-anim 4s infinite linear;
   z-index: 2;
-  /* Pre-promote to compositor layer for smooth GPU animation */
-  will-change: transform, opacity, filter;
-  /* Isolate layout to prevent reflow from spreading */
-  contain: layout;
+  /* opacity + transform are the only GPU-composited properties — no filter */
+  will-change: transform, opacity;
+  contain: layout style;
 }
 
 .loader-letter:nth-child(1) { animation-delay: 0.05s; }
@@ -332,23 +331,18 @@
   0% {
     opacity: 0;
     transform: scale(1) translateY(0);
-    /* Use filter:drop-shadow instead of text-shadow — GPU composited, avoids paint */
-    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
   }
   5% {
     opacity: 1;
     transform: scale(1.1) translateY(-2px);
-    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
   }
   20% {
     opacity: 0.2;
     transform: scale(1) translateY(0);
-    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
   }
   100% {
     opacity: 0;
     transform: scale(1) translateY(0);
-    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
   }
 }
 /* Modal Fade and Slide Keyframes */

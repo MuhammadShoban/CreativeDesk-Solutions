@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CreativeDesk Solutions — SEO & Backlink Strategy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #2a2a3a;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --text: #e8e8f0;
+    --muted: #8888aa;
+    --heading: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0d0d1a 0%, #1a0a2e 50%, #0a1628 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 40%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    display: inline-block;
+    background: rgba(124,58,237,0.2);
+    border: 1px solid rgba(124,58,237,0.4);
+    color: #a78bfa;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--heading);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: #a78bfa; }
+  .hero p {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 620px;
+    margin-bottom: 30px;
+  }
+  .hero-url {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--accent2);
+    font-family: monospace;
+  }
+
+  /* ALERT BANNER */
+  .alert-banner {
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-left: 4px solid var(--danger);
+    padding: 16px 24px;
+    margin: 30px 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .alert-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .alert-banner strong { color: #fca5a5; display: block; margin-bottom: 4px; font-size: 15px; }
+  .alert-banner p { color: #f87171; font-size: 14px; }
+
+  /* LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 40px; }
+
+  /* SECTION HEADERS */
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon { font-size: 20px; }
+  .section-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    padding-left: 30px;
+  }
+
+  /* SCORE CARDS */
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .score-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .score-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .score-card.red::before { background: var(--danger); }
+  .score-card.yellow::before { background: var(--accent3); }
+  .score-card.green::before { background: var(--success); }
+  .score-card.blue::before { background: var(--accent2); }
+  .score-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .score-card.red .score-num { color: var(--danger); }
+  .score-card.yellow .score-num { color: var(--accent3); }
+  .score-card.green .score-num { color: var(--success); }
+  .score-card.blue .score-num { color: var(--accent2); }
+  .score-label { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+  .score-detail { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* ISSUES LIST */
+  .issues-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 40px; }
+  .issue-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .issue-badge {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: 2px;
+  }
+  .badge-critical { background: rgba(239,68,68,0.2); color: #f87171; }
+  .badge-warning { background: rgba(245,158,11,0.2); color: #fbbf24; }
+  .badge-info { background: rgba(124,58,237,0.2); color: #a78bfa; }
+  .issue-text strong { color: var(--heading); font-size: 14px; display: block; margin-bottom: 3px; }
+  .issue-text p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* KEYWORDS TABLE */
+  .kw-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+  .kw-table thead tr { background: rgba(124,58,237,0.15); }
+  .kw-table th {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .kw-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(42,42,58,0.5);
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  .kw-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+  .kw-table tr:last-child td { border-bottom: none; }
+  .priority-high { color: #f87171; font-weight: 600; font-size: 11px; }
+  .priority-med { color: #fbbf24; font-weight: 600; font-size: 11px; }
+  .priority-low { color: #22c55e; font-weight: 600; font-size: 11px; }
+  .kw-name { color: var(--heading); font-weight: 500; }
+  .vol-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .vol-track {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    max-width: 80px;
+  }
+  .vol-fill { height: 100%; border-radius: 2px; background: var(--accent2); }
+
+  /* BACKLINK SECTIONS */
+  .backlink-section { margin-bottom: 40px; }
+  .bl-category {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .bl-header {
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .bl-header-left { display: flex; align-items: center; gap: 12px; }
+  .bl-num {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .bl-header h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--heading); }
+  .bl-header p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .bl-impact {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .impact-high { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+  .impact-med { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+  .bl-body { padding: 20px; }
+  .bl-sites { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .bl-site {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .bl-site a { color: var(--accent2); font-size: 13px; font-weight: 500; text-decoration: none; display: block; margin-bottom: 3px; }
+  .bl-site a:hover { text-decoration: underline; }
+  .bl-site small { color: var(--muted); font-size: 11px; }
+  .bl-instructions {
+    margin-top: 16px;
+    background: rgba(124,58,237,0.07);
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .bl-instructions strong { color: #a78bfa; font-size: 13px; display: block; margin-bottom: 6px; }
+  .bl-instructions ol { margin: 0; padding-left: 18px; }
+  .bl-instructions li { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* ANCHOR TEXT */
+  .anchor-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .anchor-chip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--text);
+  }
+  .anchor-chip.type-exact { border-color: rgba(124,58,237,0.4); color: #a78bfa; }
+  .anchor-chip.type-partial { border-color: rgba(6,182,212,0.4); color: var(--accent2); }
+  .anchor-chip.type-branded { border-color: rgba(34,197,94,0.4); color: #4ade80; }
+  .anchor-chip.type-naked { border-color: rgba(245,158,11,0.4); color: #fbbf24; }
+
+  /* ROADMAP */
+  .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+  .phase-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+  }
+  .phase-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .phase-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 12px;
+  }
+  .phase-items { list-style: none; }
+  .phase-items li {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(42,42,58,0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+  .phase-items li:last-child { border-bottom: none; }
+  .phase-items li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+  .phase-1 { border-top: 3px solid var(--danger); }
+  .phase-2 { border-top: 3px solid var(--accent3); }
+  .phase-3 { border-top: 3px solid var(--success); }
+
+  /* CONTENT STRATEGY */
+  .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 40px; }
+  .content-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .content-card h4 { font-family: 'Syne', sans-serif; font-size: 14px; color: var(--heading); margin-bottom: 8px; }
+  .content-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .content-tag { display: inline-block; background: rgba(6,182,212,0.15); color: var(--accent2); border: 1px solid rgba(6,182,212,0.3); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 6px; }
+
+  /* DOMAIN ISSUE */
+  .domain-box {
+    background: rgba(245,158,11,0.07);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-left: 4px solid var(--accent3);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 30px;
+  }
+  .domain-box h4 { color: #fbbf24; font-size: 15px; margin-bottom: 6px; font-family: 'Syne', sans-serif; }
+  .domain-box p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 30px 40px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 28px; }
+    .score-grid { grid-template-columns: repeat(2, 1fr); }
+    .issues-grid { grid-template-columns: 1fr; }
+    .bl-sites { grid-template-columns: 1fr 1fr; }
+    .roadmap { grid-template-columns: 1fr; }
+    .content-grid { grid-template-columns: 1fr; }
+    .container { padding: 24px 20px; }
+    .hero { padding: 40px 20px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">SEO Audit & Backlink Strategy</div>
+  <h1>CreativeDesk <span>Solutions</span></h1>
+  <p>Complete website analysis with keyword targeting, backlink roadmap, and ranking strategy for Web Development & Mobile App Development services.</p>
+  <div class="hero-url">🔗 creative-desk-solutions.vercel.app</div>
+</div>
+
+<!-- CRITICAL ALERT -->
+<div class="alert-banner">
+  <div class="alert-icon">🚨</div>
+  <div>
+    <strong>CRITICAL: Your website is NOT indexed by Google</strong>
+    <p>The "site:creative-desk-solutions.vercel.app" search returns zero results. Google hasn't crawled your site yet. Before building any backlinks, you MUST submit your site to Google Search Console and create a sitemap. Backlinks to an unindexed site will have NO effect.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- CURRENT STATUS SCORES -->
+  <div class="section-title"><span class="icon">📊</span> Current Website Audit Scores</div>
+  <div class="section-sub">Estimated scores based on site analysis — fix these first before backlink building</div>
+  <div class="score-grid">
+    <div class="score-card red">
+      <div class="score-num">0</div>
+      <div class="score-label">Domain Authority</div>
+      <div class="score-detail">No backlinks yet</div>
+    </div>
+    <div class="score-card red">
+      <div class="score-num">0</div>
+      <div class="score-label">Google Index</div>
+      <div class="score-detail">Not indexed</div>
+    </div>
+    <div class="score-card yellow">
+      <div class="score-num">~60</div>
+      <div class="score-label">On-Page SEO</div>
+      <div class="score-detail">Good meta tags, needs more</div>
+    </div>
+    <div class="score-card green">
+      <div class="score-num">✓</div>
+      <div class="score-label">Technical Setup</div>
+      <div class="score-detail">Meta tags & OG present</div>
+    </div>
+  </div>
+
+  <!-- DOMAIN ISSUE -->
+  <div class="domain-box">
+    <h4>⚠️ Critical Issue: You're on a Vercel Subdomain</h4>
+    <p>Your site is hosted on <strong>creative-desk-solutions.vercel.app</strong> — a free Vercel subdomain. Google sees the domain authority of the entire <em>vercel.app</em> subdomain, not just your page. This severely hurts your ability to rank. <strong>To rank for competitive keywords, you MUST move to a custom domain</strong> like <em>creativedesksolutions.com</em>. A custom domain costs ~$10/year and will 5x your SEO potential. This is the single most important step.</p>
+  </div>
+
+  <!-- ON-PAGE ISSUES -->
+  <div class="section-title"><span class="icon">🔍</span> On-Page SEO Issues Found</div>
+  <div class="section-sub">Fix these before building backlinks for maximum ROI</div>
+  <div class="issues-grid">
+    <div class="issue-card">
+      <span class="issue-badge badge-critical">Critical</span>
+      <div class="issue-text">
+        <strong>No Custom Domain</strong>
+        <p>vercel.app subdomain cannot rank competitively. Get creativedesksolutions.com or similar ASAP.</p>
+      </div>
+    </div>
+    <div class="issue-card">
+      <span class="issue-badge badge-critical">Critical</span>
+      <div class="issue-text">
+        <strong>Not Submitted to Google</strong>
+        <p>Register on Google Search Console immediately and submit sitemap.xml.</p>
+      </div>
+    </div>
+    <div class="issue-card">
+      <span class="issue-badge badge-critical">Critical</span>
+      <div class="issue-text">
+        <strong>No Blog / Content Pages</strong>
+        <p>Single page sites almost never rank. You need blog posts targeting long-tail keywords.</p>
+      </div>
+    </div>
+    <div class="issue-card">
+      <span class="issue-badge badge-warning">Warning</span>
+      <div class="issue-text">
+        <strong>No Location Keywords</strong>
+        <p>Add "Pakistan", "Lahore", or city-based keywords to rank locally for web development services.</p>
+      </div>
+    </div>
+    <div class="issue-card">
+      <span class="issue-badge badge-warning">Warning</span>
+      <div class="issue-text">
+        <strong>Missing Schema Markup</strong>
+        <p>Add LocalBusiness + Service schema JSON-LD to help Google understand your business type.</p>
+      </div>
+    </div>
+    <div class="issue-card">
+      <span class="issue-badge badge-warning">Warning</span>
+      <div class="issue-text">
+        <strong>No Google Business Profile</strong>
+        <p>Create a free Google Business Profile to show in local map searches for "web developer near me".</p>
+      </div>
+    </div>
+    <div class="issue-card">
+      <span class="issue-badge badge-info">SEO</span>
+      <div class="issue-text">
+        <strong>Meta Keywords Tag</strong>
+        <p>The meta keywords tag is ignored by Google. Focus on title, description, and H1 tags instead.</p>
+      </div>
+    </div>
+    <div class="issue-card">
+      <span class="issue-badge badge-info">SEO</span>
+      <div class="issue-text">
+        <strong>No Internal Linking</strong>
+        <p>Create separate pages per service (Web Dev, Mobile App, AI Automation) for better keyword targeting.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- KEYWORD STRATEGY -->
+  <div class="section-title"><span class="icon">🎯</span> Target Keyword Strategy</div>
+  <div class="section-sub">Start with long-tail low-competition keywords, then climb to primary targets</div>
+  <table class="kw-table">
+    <thead>
+      <tr>
+        <th>Keyword</th>
+        <th>Volume</th>
+        <th>Competition</th>
+        <th>Priority</th>
+        <th>Use On</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="kw-name">web development company in Pakistan</td>
+        <td><div class="vol-bar"><div class="vol-track"><div class="vol-fill" style="width:75%"></div></div> High</div></td>
+        <td>Medium</td>
+        <td><span class="priority-high">PRIMARY</span></td>
+        <td>Homepage H1</td>
+      </tr>
+      <tr>
+        <td class="kw-name">mobile app development Pakistan</td>
+        <td><div class="vol-bar"><div class="vol-track"><div class="vol-fill" style="width:70%"></div></div> High</div></td>
+        <td>Medium</td>
+        <td><span class="priority-high">PRIMARY</span></td>
+        <td>Services Page</td>
+      </tr>
+      <tr>
+        <td class="kw-name">affordable web development services</td>
+        <td><div class="vol-bar"><div class="vol-track"><div class="vol-fill" style="width:60%"></div></div> Med</div></td>
+        <td>Medium</td>
+        <td><span class="priority-high">PRIMARY</span></td>
+        <td>Homepage</td>
+      </tr>
+      <tr>
+        <td class="kw-name">web developer Lahore</td>
+        <td><div class="vol-bar"><div class="vol-track"><div class="vol-fill" style="width:50%"></div></div> Med</div></td>
+        <td>Low</td>
+        <td><span class="priority-med">SECONDARY</span></td>
+        <td>About Page</td>
+      </tr>
+      <tr>
+        <td class="kw-name">React Next.js development services</td>
+        <td><div class="vol-bar"><div class="vol-track"><div class="vol-fill" style="width:55%"></div></div> Med</div></td>
+        <td>Low</td>
+        <td><span class="priority-med">SECONDARY</span></td>
+        <td>Blog Post</td>
+      </tr>
+      <tr>
+        <td class="kw-name">AI automation services for business</td>
+        <td><div class="vol-bar"><div class="vol-track"><div class="vol-fill" style="width:65%"></div></div> High</div></td>
+        <td>Medium</td>
+        <td><span class="priority-med">SECONDARY</span></td>
+        <td>Services Page</td>
+      </tr>
+      <tr>
+        <td class="kw-name">custom software development company</td>
+        <td><div class="vol-bar"><div class="vol-track"><div class="vol-fill" style="width:80%"></div></div> Very High</div></td>
+        <td>High</td>
+        <td><span class="priority-low">LONG-TERM</span></td>
+        <td>Blog + Homepage</td>
+      </tr>
+      <tr>
+        <td class="kw-name">how much does it cost to build an app in Pakistan</td>
+        <td><div class="vol-bar"><div class="vol-track"><div class="vol-fill" style="width:35%"></div></div> Low</div></td>
+        <td>Very Low</td>
+        <td><span class="priority-low">QUICK WIN</span></td>
+        <td>Blog Post</td>
+      </tr>
+      <tr>
+        <td class="kw-name">best web development agency Pakistan 2025</td>
+        <td><div class="vol-bar"><div class="vol-track"><div class="vol-fill" style="width:30%"></div></div> Low</div></td>
+        <td>Very Low</td>
+        <td><span class="priority-low">QUICK WIN</span></td>
+        <td>Blog Post</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <!-- BACKLINK STRATEGY -->
+  <div class="section-title"><span class="icon">🔗</span> Backlink Building Strategy</div>
+  <div class="section-sub">80+ backlink sources organized by type — start with Free & Easy, then move to Content-based</div>
+
+  <!-- CATEGORY 1: DIRECTORIES -->
+  <div class="bl-category">
+    <div class="bl-header">
+      <div class="bl-header-left">
+        <div class="bl-num" style="background:rgba(239,68,68,0.2);color:#f87171;">01</div>
+        <div>
+          <h3>Business Directories & Listings</h3>
+          <p>Free high-DA backlinks — do these first, takes 1–2 hours total</p>
+        </div>
+      </div>
+      <span class="bl-impact impact-high">Highest Impact</span>
+    </div>
+    <div class="bl-body">
+      <div class="bl-sites">
+        <div class="bl-site"><a href="https://clutch.co" target="_blank">clutch.co</a><small>DA 74 — Top IT agency directory. Free listing.</small></div>
+        <div class="bl-site"><a href="https://www.goodfirms.co" target="_blank">goodfirms.co</a><small>DA 65 — Software & app dev directory</small></div>
+        <div class="bl-site"><a href="https://www.designrush.com" target="_blank">designrush.com</a><small>DA 61 — Agency listings</small></div>
+        <div class="bl-site"><a href="https://www.sortlist.com" target="_blank">sortlist.com</a><small>DA 58 — Agency marketplace</small></div>
+        <div class="bl-site"><a href="https://www.crunchbase.com" target="_blank">crunchbase.com</a><small>DA 91 — Company profiles (very high DA)</small></div>
+        <div class="bl-site"><a href="https://www.yelp.com/biz" target="_blank">yelp.com</a><small>DA 93 — Business listing</small></div>
+        <div class="bl-site"><a href="https://www.bark.com" target="_blank">bark.com</a><small>DA 63 — Service provider listing</small></div>
+        <div class="bl-site"><a href="https://www.yellowpages.com" target="_blank">yellowpages.com</a><small>DA 89 — Classic directory</small></div>
+        <div class="bl-site"><a href="https://www.hotfrog.com" target="_blank">hotfrog.com</a><small>DA 55 — Free business directory</small></div>
+        <div class="bl-site"><a href="https://www.cylex.us.com" target="_blank">cylex.com</a><small>DA 52 — International directory</small></div>
+        <div class="bl-site"><a href="https://www.manta.com" target="_blank">manta.com</a><small>DA 70 — Small business directory</small></div>
+        <div class="bl-site"><a href="https://www.trustpilot.com" target="_blank">trustpilot.com</a><small>DA 92 — Reviews + backlink</small></div>
+      </div>
+      <div class="bl-instructions">
+        <strong>📋 How to do this:</strong>
+        <ol>
+          <li>Go to each site and create a free company profile</li>
+          <li>Use <strong>Name:</strong> CreativeDesk Solutions, <strong>Category:</strong> Web Development / Software Company</li>
+          <li>Add your full description (include keywords: "web development", "mobile app development", "Pakistan")</li>
+          <li>Most important: paste your website URL — that's the backlink</li>
+          <li>Upload logo and fill ALL fields for maximum trust signals</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 2: PORTFOLIO PLATFORMS -->
+  <div class="bl-category">
+    <div class="bl-header">
+      <div class="bl-header-left">
+        <div class="bl-num" style="background:rgba(124,58,237,0.2);color:#a78bfa;">02</div>
+        <div>
+          <h3>Portfolio & Developer Platforms</h3>
+          <p>Showcase your work and earn do-follow links from high-DA platforms</p>
+        </div>
+      </div>
+      <span class="bl-impact impact-high">High Impact</span>
+    </div>
+    <div class="bl-body">
+      <div class="bl-sites">
+        <div class="bl-site"><a href="https://www.behance.net" target="_blank">behance.net</a><small>DA 91 — Showcase your web projects</small></div>
+        <div class="bl-site"><a href="https://dribbble.com" target="_blank">dribbble.com</a><small>DA 91 — UI/UX & design work</small></div>
+        <div class="bl-site"><a href="https://github.com" target="_blank">github.com</a><small>DA 96 — Create repos, link your site in bio</small></div>
+        <div class="bl-site"><a href="https://www.producthunt.com" target="_blank">producthunt.com</a><small>DA 90 — Launch your agency as a product</small></div>
+        <div class="bl-site"><a href="https://www.f6s.com" target="_blank">f6s.com</a><small>DA 63 — Startup profile</small></div>
+        <div class="bl-site"><a href="https://angel.co" target="_blank">angel.co (Wellfound)</a><small>DA 90 — Startup/company profile</small></div>
+        <div class="bl-site"><a href="https://www.appfutura.com" target="_blank">appfutura.com</a><small>DA 55 — App & web dev directory</small></div>
+        <div class="bl-site"><a href="https://www.topdevelopers.co" target="_blank">topdevelopers.co</a><small>DA 52 — IT company rankings</small></div>
+        <div class="bl-site"><a href="https://www.toptal.com/community" target="_blank">toptal.com</a><small>DA 85 — Developer community</small></div>
+      </div>
+      <div class="bl-instructions">
+        <strong>📋 How to do this:</strong>
+        <ol>
+          <li>Create profiles on each platform with your company details</li>
+          <li>On <strong>Behance/Dribbble</strong>: Post 3–5 case studies of websites/apps you built. Link to your site in each project description</li>
+          <li>On <strong>GitHub</strong>: Create an organization account for CreativeDesk Solutions. Add website URL to profile. Create public repos with README.md files that describe your services and link back</li>
+          <li>On <strong>Product Hunt</strong>: Launch your agency — describe your services, post screenshots, get upvotes</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 3: SOCIAL PROFILES -->
+  <div class="bl-category">
+    <div class="bl-header">
+      <div class="bl-header-left">
+        <div class="bl-num" style="background:rgba(6,182,212,0.2);color:#22d3ee;">03</div>
+        <div>
+          <h3>Social Media & Professional Profiles</h3>
+          <p>NAP consistency + social signals that Google values</p>
+        </div>
+      </div>
+      <span class="bl-impact impact-high">High Impact</span>
+    </div>
+    <div class="bl-body">
+      <div class="bl-sites">
+        <div class="bl-site"><a href="https://www.linkedin.com/company" target="_blank">LinkedIn Company Page</a><small>DA 99 — Create company page with website link</small></div>
+        <div class="bl-site"><a href="https://www.facebook.com/business" target="_blank">Facebook Business</a><small>DA 96 — Facebook business page</small></div>
+        <div class="bl-site"><a href="https://twitter.com" target="_blank">X (Twitter)</a><small>DA 95 — Account with website in bio</small></div>
+        <div class="bl-site"><a href="https://www.instagram.com" target="_blank">Instagram Business</a><small>DA 93 — Agency profile with link</small></div>
+        <div class="bl-site"><a href="https://www.youtube.com" target="_blank">YouTube Channel</a><small>DA 100 — Put URL in About section</small></div>
+        <div class="bl-site"><a href="https://pinterest.com" target="_blank">Pinterest</a><small>DA 94 — Pin your web designs</small></div>
+        <div class="bl-site"><a href="https://www.quora.com" target="_blank">Quora Profile</a><small>DA 93 — Answer dev questions, link back</small></div>
+        <div class="bl-site"><a href="https://medium.com" target="_blank">Medium</a><small>DA 96 — Publish articles, link to site</small></div>
+        <div class="bl-site"><a href="https://dev.to" target="_blank">dev.to</a><small>DA 80 — Developer blog platform</small></div>
+      </div>
+      <div class="bl-instructions">
+        <strong>📋 How to do this:</strong>
+        <ol>
+          <li>Create each profile with <strong>identical</strong> business Name, Address, Phone (NAP consistency is critical for local SEO)</li>
+          <li>Always add your website URL to the website/link field</li>
+          <li>Write a keyword-rich bio: "CreativeDesk Solutions — Web Development & Mobile App Development Agency in Pakistan"</li>
+          <li>On <strong>Quora</strong>: Answer questions like "How much does web development cost in Pakistan?" and include your website link naturally in the answer</li>
+          <li>On <strong>Medium & Dev.to</strong>: Write 2–3 articles per month linking back to your site</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 4: GUEST POSTING -->
+  <div class="bl-category">
+    <div class="bl-header">
+      <div class="bl-header-left">
+        <div class="bl-num" style="background:rgba(245,158,11,0.2);color:#fbbf24;">04</div>
+        <div>
+          <h3>Guest Posting & Article Submissions</h3>
+          <p>Write articles for high-DA sites and get editorial backlinks (most powerful type)</p>
+        </div>
+      </div>
+      <span class="bl-impact impact-med">Medium-High Impact</span>
+    </div>
+    <div class="bl-body">
+      <div class="bl-sites">
+        <div class="bl-site"><a href="https://www.smashingmagazine.com/write-for-us" target="_blank">Smashing Magazine</a><small>DA 88 — Web dev articles</small></div>
+        <div class="bl-site"><a href="https://css-tricks.com/guest-posting" target="_blank">CSS-Tricks</a><small>DA 83 — Frontend articles</small></div>
+        <div class="bl-site"><a href="https://hackernoon.com" target="_blank">HackerNoon</a><small>DA 82 — Tech articles, free publishing</small></div>
+        <div class="bl-site"><a href="https://dzone.com/writers-zone" target="_blank">DZone</a><small>DA 79 — Developer community articles</small></div>
+        <div class="bl-site"><a href="https://www.sitepoint.com/write-for-us" target="_blank">SitePoint</a><small>DA 79 — Web dev articles</small></div>
+        <div class="bl-site"><a href="https://www.techopedia.com" target="_blank">Techopedia</a><small>DA 76 — Tech content</small></div>
+        <div class="bl-site"><a href="https://hashnode.com" target="_blank">Hashnode</a><small>DA 72 — Dev blogging platform</small></div>
+        <div class="bl-site"><a href="https://itnext.io" target="_blank">ITNEXT (Medium)</a><small>DA 71 — IT & dev articles</small></div>
+        <div class="bl-site"><a href="https://www.freecodecamp.org/news/write" target="_blank">freeCodeCamp</a><small>DA 91 — Technical tutorials</small></div>
+      </div>
+      <div class="bl-instructions">
+        <strong>📋 Article Ideas That Will Get Published:</strong>
+        <ol>
+          <li>"10 Things to Consider Before Building a Mobile App in 2025"</li>
+          <li>"React vs Next.js: Which Should You Choose for Your Business Website?"</li>
+          <li>"How AI Automation is Transforming Small Businesses in South Asia"</li>
+          <li>"Complete Guide to Web Development Costs in Pakistan"</li>
+          <li>Each article: include your author bio at the end with a link back to <em>creative-desk-solutions.vercel.app</em></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 5: FORUMS & COMMUNITIES -->
+  <div class="bl-category">
+    <div class="bl-header">
+      <div class="bl-header-left">
+        <div class="bl-num" style="background:rgba(34,197,94,0.2);color:#4ade80;">05</div>
+        <div>
+          <h3>Forums, Q&A & Community Backlinks</h3>
+          <p>Build authority by helping others — Google loves these contextual links</p>
+        </div>
+      </div>
+      <span class="bl-impact impact-med">Medium Impact</span>
+    </div>
+    <div class="bl-body">
+      <div class="bl-sites">
+        <div class="bl-site"><a href="https://stackoverflow.com" target="_blank">Stack Overflow</a><small>DA 96 — Answer questions, link in profile</small></div>
+        <div class="bl-site"><a href="https://www.reddit.com/r/webdev" target="_blank">Reddit r/webdev</a><small>DA 95 — Share projects, get traffic</small></div>
+        <div class="bl-site"><a href="https://www.reddit.com/r/mobileapp" target="_blank">Reddit r/mobileapp</a><small>DA 95 — Mobile app community</small></div>
+        <div class="bl-site"><a href="https://hashnode.com" target="_blank">Hashnode</a><small>DA 72 — Dev Q&A + blog</small></div>
+        <div class="bl-site"><a href="https://community.webflow.com" target="_blank">Webflow Community</a><small>DA 75 — Web design community</small></div>
+        <div class="bl-site"><a href="https://www.indiehackers.com" target="_blank">Indie Hackers</a><small>DA 77 — Startup community</small></div>
+        <div class="bl-site"><a href="https://news.ycombinator.com" target="_blank">Hacker News</a><small>DA 93 — Tech community (Show HN post)</small></div>
+        <div class="bl-site"><a href="https://www.designernews.co" target="_blank">Designer News</a><small>DA 66 — Design community</small></div>
+        <div class="bl-site"><a href="https://www.pakistanicoder.com" target="_blank">Pakistani Tech Forums</a><small>Local authority — industry forums</small></div>
+      </div>
+      <div class="bl-instructions">
+        <strong>📋 How to do this effectively:</strong>
+        <ol>
+          <li>On <strong>Stack Overflow</strong>: Genuinely answer web dev / mobile dev questions. Add website to your profile. Never spam links — build reputation first</li>
+          <li>On <strong>Reddit</strong>: Post "I built this website for a client" or share tips. Add website to your Reddit profile. Don't post links in comments without contributing first</li>
+          <li>On <strong>Indie Hackers</strong>: Create a profile for your company, share monthly revenue/progress updates — the community loves transparency</li>
+          <li>On <strong>Hacker News</strong>: Post "Show HN: I built a web agency in Pakistan" — this can go viral and bring hundreds of backlinks</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 6: FREELANCE PLATFORMS -->
+  <div class="bl-category">
+    <div class="bl-header">
+      <div class="bl-header-left">
+        <div class="bl-num" style="background:rgba(239,68,68,0.2);color:#f87171;">06</div>
+        <div>
+          <h3>Freelance & Marketplace Profiles</h3>
+          <p>Both clients and Google traffic — high-DA profile backlinks</p>
+        </div>
+      </div>
+      <span class="bl-impact impact-high">High Impact</span>
+    </div>
+    <div class="bl-body">
+      <div class="bl-sites">
+        <div class="bl-site"><a href="https://www.upwork.com" target="_blank">Upwork Agency</a><small>DA 93 — Create agency profile with URL</small></div>
+        <div class="bl-site"><a href="https://www.fiverr.com/pro" target="_blank">Fiverr Pro</a><small>DA 92 — Service listings with links</small></div>
+        <div class="bl-site"><a href="https://www.freelancer.com" target="_blank">Freelancer.com</a><small>DA 87 — Agency profile</small></div>
+        <div class="bl-site"><a href="https://www.peopleperhour.com" target="_blank">PeoplePerHour</a><small>DA 78 — UK-based agency listings</small></div>
+        <div class="bl-site"><a href="https://guru.com" target="_blank">Guru.com</a><small>DA 76 — Portfolio with backlink</small></div>
+        <div class="bl-site"><a href="https://www.toptal.com" target="_blank">Toptal</a><small>DA 85 — Elite developer network</small></div>
+      </div>
+      <div class="bl-instructions">
+        <strong>📋 How to do this:</strong>
+        <ol>
+          <li>Create a company/agency profile (not just freelancer) on each platform</li>
+          <li>Add your website URL to the portfolio section</li>
+          <li>Upload 3–5 past project screenshots as portfolio items</li>
+          <li>In your service description, naturally mention: "web development", "mobile app development", "Pakistan"</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ANCHOR TEXT STRATEGY -->
+  <div class="section-title"><span class="icon">⚓</span> Anchor Text Distribution</div>
+  <div class="section-sub">Use this exact mix when building backlinks — wrong anchor text distribution can get you penalized</div>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px;">
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">When getting a backlink, make sure the clickable text matches this distribution. Never use exact-match keywords for more than 10% of links.</p>
+    <div class="anchor-chips">
+      <span class="anchor-chip type-exact">web development company (5%)</span>
+      <span class="anchor-chip type-exact">mobile app development (5%)</span>
+      <span class="anchor-chip type-partial">web development services Pakistan (10%)</span>
+      <span class="anchor-chip type-partial">app development agency (10%)</span>
+      <span class="anchor-chip type-branded">CreativeDesk Solutions (30%)</span>
+      <span class="anchor-chip type-branded">Creative Desk (15%)</span>
+      <span class="anchor-chip type-naked">creative-desk-solutions.vercel.app (15%)</span>
+      <span class="anchor-chip type-naked">click here / visit website (10%)</span>
+    </div>
+    <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;">
+      <span style="font-size:12px;"><span class="anchor-chip type-exact" style="padding:2px 8px;">Purple</span> = Exact match (use sparingly)</span>
+      <span style="font-size:12px;"><span class="anchor-chip type-partial" style="padding:2px 8px;">Teal</span> = Partial match</span>
+      <span style="font-size:12px;"><span class="anchor-chip type-branded" style="padding:2px 8px;">Green</span> = Branded (safest)</span>
+      <span style="font-size:12px;"><span class="anchor-chip type-naked" style="padding:2px 8px;">Yellow</span> = Naked URL / generic</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CONTENT STRATEGY -->
+  <div class="section-title"><span class="icon">✍️</span> Content Strategy (Earn Backlinks Naturally)</div>
+  <div class="section-sub">Great content attracts backlinks automatically — these topics will rank AND get shared</div>
+  <div class="content-grid">
+    <div class="content-card">
+      <div class="content-tag">Blog Post</div>
+      <h4>"How Much Does Web Development Cost in Pakistan in 2025?"</h4>
+      <p>People Google this constantly. Write a detailed guide with price ranges. This alone can rank on page 1 and attract 5+ natural backlinks per month.</p>
+    </div>
+    <div class="content-card">
+      <div class="content-tag">Blog Post</div>
+      <h4>"Flutter vs React Native: Best Choice for Mobile Apps in 2025"</h4>
+      <p>High-volume tech comparison. Easy to rank long-term. Developers will link to it from forums and communities.</p>
+    </div>
+    <div class="content-card">
+      <div class="content-tag">Case Study</div>
+      <h4>"How We Built a Mobile App for [Client] in 60 Days"</h4>
+      <p>Real case studies build trust AND attract links from business blogs. Prospective clients share these. Name the client if they allow it.</p>
+    </div>
+    <div class="content-card">
+      <div class="content-tag">Guide</div>
+      <h4>"Complete Guide to Hiring a Web Developer in Pakistan"</h4>
+      <p>Targets people searching to hire, not just research. Very high buying intent. Include pricing, process, what to ask. This will rank for tons of long-tail terms.</p>
+    </div>
+    <div class="content-card">
+      <div class="content-tag">Tutorial</div>
+      <h4>"How to Build a Business Website from Scratch (2025 Guide)"</h4>
+      <p>Educational content for SMEs. Gets linked from business blogs, Facebook groups, and YouTube descriptions. High shareability.</p>
+    </div>
+    <div class="content-card">
+      <div class="content-tag">Listicle</div>
+      <h4>"Top 10 Web Design Trends for Pakistani Businesses in 2025"</h4>
+      <p>Local + trend content. Other Pakistani business blogs will link to it. Works great for local SEO and social shares.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ROADMAP -->
+  <div class="section-title"><span class="icon">🗺️</span> 90-Day Action Roadmap</div>
+  <div class="section-sub">Follow this exact order for maximum results</div>
+  <div class="roadmap">
+    <div class="phase-card phase-1">
+      <div class="phase-tag">Week 1–2 · Foundation</div>
+      <div class="phase-title">Fix the Basics First</div>
+      <ul class="phase-items">
+        <li>Buy custom domain (creativedesksolutions.com)</li>
+        <li>Set up Google Search Console & submit sitemap</li>
+        <li>Set up Google Analytics 4</li>
+        <li>Create Google Business Profile</li>
+        <li>Add schema markup (LocalBusiness)</li>
+        <li>Create separate pages for each service</li>
+        <li>Submit to Google Index via Search Console</li>
+      </ul>
+    </div>
+    <div class="phase-card phase-2">
+      <div class="phase-tag">Week 3–6 · Build Presence</div>
+      <div class="phase-title">Directory & Profile Blitz</div>
+      <ul class="phase-items">
+        <li>Submit to all 12 business directories</li>
+        <li>Create LinkedIn + social profiles</li>
+        <li>Create Clutch, GoodFirms, Crunchbase profiles</li>
+        <li>Create GitHub org + Behance portfolio</li>
+        <li>Create Upwork & Fiverr agency pages</li>
+        <li>Write first 2 blog posts with target keywords</li>
+        <li>Post on Product Hunt</li>
+      </ul>
+    </div>
+    <div class="phase-card phase-3">
+      <div class="phase-tag">Week 7–12 · Scale</div>
+      <div class="phase-title">Content & Guest Posting</div>
+      <ul class="phase-items">
+        <li>Publish 2 blog posts/week minimum</li>
+        <li>Submit 2 guest posts to DA 70+ sites</li>
+        <li>Actively answer on Quora + Reddit</li>
+        <li>Post HackerNews "Show HN"</li>
+        <li>Reach out to 10 local blogs for link exchange</li>
+        <li>Monitor rankings in Search Console weekly</li>
+        <li>Analyze competitors' backlinks with Ahrefs free trial</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:40px;">
+    <div class="section-title" style="margin-bottom:12px;"><span class="icon">🛠️</span> Free Tools to Track Your Progress</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;">
+        <div style="color:var(--heading);font-weight:600;font-size:14px;margin-bottom:4px;">Google Search Console</div>
+        <div style="color:var(--muted);font-size:12px;">Track keywords, clicks, index status. FREE. Must-have #1 tool.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;">
+        <div style="color:var(--heading);font-weight:600;font-size:14px;margin-bottom:4px;">Ahrefs Free / Ubersuggest</div>
+        <div style="color:var(--muted);font-size:12px;">Check backlinks, keyword volumes, competitor analysis.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;">
+        <div style="color:var(--heading);font-weight:600;font-size:14px;margin-bottom:4px;">Moz Link Explorer</div>
+        <div style="color:var(--muted);font-size:12px;">Check your Domain Authority score and track backlink growth.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;">
+        <div style="color:var(--heading);font-weight:600;font-size:14px;margin-bottom:4px;">Google Analytics 4</div>
+        <div style="color:var(--muted);font-size:12px;">Track referral traffic from backlinks. FREE.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;">
+        <div style="color:var(--heading);font-weight:600;font-size:14px;margin-bottom:4px;">Screaming Frog (Free)</div>
+        <div style="color:var(--muted);font-size:12px;">Audit on-page SEO — missing meta tags, broken links, etc.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;">
+        <div style="color:var(--heading);font-weight:600;font-size:14px;margin-bottom:4px;">Answer The Public</div>
+        <div style="color:var(--muted);font-size:12px;">Find questions people ask about web/app development — blog topic ideas.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  CreativeDesk Solutions — SEO & Backlink Strategy Report · Generated June 2026 · Follow the 90-day roadmap for best results
+</div>
+
+</body>
+</html>

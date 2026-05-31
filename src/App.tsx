@@ -1,5 +1,5 @@
 import './App.css';
-import { lazy, Suspense, useState, useEffect } from 'react';
+import { lazy, Suspense, useState, useEffect, useRef } from 'react';
 
 // ── Critical path: load Navbar + Hero immediately (above-the-fold) ──
 import Navbar from './components/Navbar';
@@ -22,12 +22,59 @@ const Footer              = lazy(() => import('./components/Footer'));
 const FloatingContact     = lazy(() => import('./components/FloatingContact'));
 const TopProjects         = lazy(() => import('./components/TopProjects'));
 const ServiceDetail       = lazy(() => import('./components/ServiceDetail'));
+const Blog                = lazy(() => import('./components/Blog'));
 
 // ── Lightweight skeleton loader for below-fold sections ──
 function SectionSkeleton() {
   return (
     <div className="w-full py-24 flex items-center justify-center" aria-hidden="true">
       <div className="w-12 h-12 rounded-full border-4 border-brand-200 border-t-brand-600 animate-spin" />
+    </div>
+  );
+}
+
+// ── High Performance Intersection Observer Lazy Loader ──
+interface LazySectionProps {
+  id?: string;
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
+}
+
+function LazySection({ id, children, fallback }: LazySectionProps) {
+  const [shouldRender, setShouldRender] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // If URL hash matches this section's ID, render immediately
+    if (id && window.location.hash && window.location.hash.toLowerCase().includes(id.toLowerCase())) {
+      setShouldRender(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '300px' } // Preload 300px before scroll for smooth experience
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [id]);
+
+  if (shouldRender) {
+    return <div id={id}>{children}</div>;
+  }
+
+  return (
+    <div id={id} ref={ref} className="w-full min-h-[100px]">
+      {fallback}
     </div>
   );
 }
@@ -40,6 +87,7 @@ function getPageFromPath(path: string) {
   if (cleanPath === 'portfolio') return 'portfolio';
   if (cleanPath === 'contact') return 'contact';
   if (cleanPath === 'top-projects') return 'top-projects';
+  if (cleanPath === 'blog' || cleanPath.startsWith('blog/')) return 'blog';
   return 'home';
 }
 
@@ -150,45 +198,66 @@ function App() {
             <Hero />
 
             {/* All below-fold sections are code-split and lazy loaded */}
-            <Suspense fallback={<SectionSkeleton />}>
-              <PartnersMarquee />
-            </Suspense>
+            <LazySection fallback={<SectionSkeleton />}>
+              <Suspense fallback={<SectionSkeleton />}>
+                <PartnersMarquee />
+              </Suspense>
+            </LazySection>
 
-            <Suspense fallback={<SectionSkeleton />}>
-              <Challenges />
-            </Suspense>
+            <LazySection id="challenges" fallback={<SectionSkeleton />}>
+              <Suspense fallback={<SectionSkeleton />}>
+                <Challenges />
+              </Suspense>
+            </LazySection>
 
-            <Suspense fallback={<SectionSkeleton />}>
-              <VideoShowcase />
-            </Suspense>
+            <LazySection id="video-showcase" fallback={<SectionSkeleton />}>
+              <Suspense fallback={<SectionSkeleton />}>
+                <VideoShowcase />
+              </Suspense>
+            </LazySection>
 
-            <Suspense fallback={<SectionSkeleton />}>
-              <Services />
-            </Suspense>
+            <LazySection id="services" fallback={<SectionSkeleton />}>
+              <Suspense fallback={<SectionSkeleton />}>
+                <Services />
+              </Suspense>
+            </LazySection>
 
-            <Suspense fallback={<SectionSkeleton />}>
-              <Portfolio />
-            </Suspense>
+            <LazySection id="portfolio" fallback={<SectionSkeleton />}>
+              <Suspense fallback={<SectionSkeleton />}>
+                <Portfolio />
+              </Suspense>
+            </LazySection>
 
-            <Suspense fallback={<SectionSkeleton />}>
-              <Testimonials />
-            </Suspense>
+            <LazySection id="testimonials" fallback={<SectionSkeleton />}>
+              <Suspense fallback={<SectionSkeleton />}>
+                <Testimonials />
+              </Suspense>
+            </LazySection>
 
-            <Suspense fallback={<SectionSkeleton />}>
-              <WhyUs />
-            </Suspense>
+            <LazySection id="why-us" fallback={<SectionSkeleton />}>
+              <Suspense fallback={<SectionSkeleton />}>
+                <WhyUs />
+              </Suspense>
+            </LazySection>
 
-            <Suspense fallback={<SectionSkeleton />}>
-              <ProcessComp />
-            </Suspense>
+            <LazySection id="process" fallback={<SectionSkeleton />}>
+              <Suspense fallback={<SectionSkeleton />}>
+                <ProcessComp />
+              </Suspense>
+            </LazySection>
 
-            <Suspense fallback={<SectionSkeleton />}>
-              <FAQ />
-            </Suspense>
+            <LazySection id="faq" fallback={<SectionSkeleton />}>
+              <Suspense fallback={<SectionSkeleton />}>
+                <FAQ />
+              </Suspense>
+            </LazySection>
 
-            <Suspense fallback={<SectionSkeleton />}>
-              <Contact />
-            </Suspense>
+            <LazySection id="contact" fallback={<SectionSkeleton />}>
+              <Suspense fallback={<SectionSkeleton />}>
+                <Contact />
+              </Suspense>
+            </LazySection>
+
           </>
         )}
 
@@ -232,42 +301,53 @@ function App() {
             <ServiceDetail currentPath={currentPath} />
           </Suspense>
         )}
+
+        {activePage === 'blog' && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <Blog currentPath={currentPath} />
+          </Suspense>
+        )}
       </main>
 
       {/* CREATIVEDESK SOLUTIONS loader section above footer */}
-      <div className="bg-slate-950 flex justify-center items-center py-20 overflow-hidden select-none">
-        <div className="loader-wrapper scale-75 sm:scale-100 md:scale-125 lg:scale-150 my-0">
-          <span className="loader-letter">C</span>
-          <span className="loader-letter">R</span>
-          <span className="loader-letter">E</span>
-          <span className="loader-letter">A</span>
-          <span className="loader-letter">T</span>
-          <span className="loader-letter">I</span>
-          <span className="loader-letter">V</span>
-          <span className="loader-letter">E</span>
-          <span className="loader-letter">D</span>
-          <span className="loader-letter">E</span>
-          <span className="loader-letter">S</span>
-          <span className="loader-letter">K</span>
-          
-          <span className="mr-5 sm:mr-8 md:mr-10"></span>
-          
-          <span className="loader-letter">S</span>
-          <span className="loader-letter">O</span>
-          <span className="loader-letter">L</span>
-          <span className="loader-letter">U</span>
-          <span className="loader-letter">T</span>
-          <span className="loader-letter">I</span>
-          <span className="loader-letter">O</span>
-          <span className="loader-letter">N</span>
-          <span className="loader-letter">S</span>
-          <div className="loader" />
+      <LazySection>
+        <div className="bg-slate-950 flex justify-center items-center py-20 overflow-hidden select-none">
+          <div className="loader-wrapper scale-75 sm:scale-100 md:scale-125 lg:scale-150 my-0">
+            <span className="loader-letter">C</span>
+            <span className="loader-letter">R</span>
+            <span className="loader-letter">E</span>
+            <span className="loader-letter">A</span>
+            <span className="loader-letter">T</span>
+            <span className="loader-letter">I</span>
+            <span className="loader-letter">V</span>
+            <span className="loader-letter">E</span>
+            <span className="loader-letter">D</span>
+            <span className="loader-letter">E</span>
+            <span className="loader-letter">S</span>
+            <span className="loader-letter">K</span>
+            
+            <span className="mr-5 sm:mr-8 md:mr-10"></span>
+            
+            <span className="loader-letter">S</span>
+            <span className="loader-letter">O</span>
+            <span className="loader-letter">L</span>
+            <span className="loader-letter">U</span>
+            <span className="loader-letter">T</span>
+            <span className="loader-letter">I</span>
+            <span className="loader-letter">O</span>
+            <span className="loader-letter">N</span>
+            <span className="loader-letter">S</span>
+            <div className="loader" />
+          </div>
         </div>
-      </div>
+      </LazySection>
 
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
+      <LazySection>
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+      </LazySection>
+
     </>
   );
 }

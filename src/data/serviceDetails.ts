@@ -1,3 +1,21 @@
+import adminPanelMockup from '../assets/admin_panel_mockup.png';
+import sqlDatabaseLogo from '../assets/sql_database_logo.png';
+import whyChooseUsImg from '../assets/why_choose_us.png';
+import prebuiltSaasWhyChoose from '../assets/prebuilt_saas_why_choose.png';
+import webReactSites from '../assets/web_react_sites.png';
+import webContentEditor from '../assets/web_content_editor.png';
+import webEcommerceStore from '../assets/web_ecommerce_store.png';
+import webLandingPages from '../assets/web_landing_pages.png';
+import mobileAppsHero from '../assets/mobile_apps_hero.png';
+import mobileFlutterApps from '../assets/mobile_flutter_apps.png';
+import mobileReactNative from '../assets/mobile_react_native.png';
+import mobileAppStoreLaunch from '../assets/mobile_app_store_launch.png';
+import mobileOfflineDb from '../assets/mobile_offline_db.png';
+import mobileWhyChooseUs from '../assets/mobile_why_choose_us.png';
+import maintenanceHero from '../assets/maintenance_hero.png';
+import maintenanceUptimeMonitoring from '../assets/maintenance_uptime_monitoring.png';
+import maintenanceDailyBackups from '../assets/maintenance_daily_backups.png';
+
 export interface Offering {
   title: string;
   desc: string;
@@ -34,6 +52,9 @@ export interface ServiceDetailData {
   techTitle: string;
   techDesc: string;
   techItems: TechItem[];
+  // Optional SEO content section
+  seoHeading?: string;
+  seoContent?: string[];
 }
 
 export const serviceDetails: Record<string, ServiceDetailData> = {
@@ -46,40 +67,40 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
     ctaText: 'Request Custom Quote',
     heroImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80',
     offeringsTitle: 'What All We Offer',
-    offeringsDesc: 'Every component of our custom software suites is built with scalability, auditability, and speed in mind.',
+    offeringsDesc: 'Every component of our custom software suites is built with scalability, security, and speed in mind.',
     offerings: [
       {
-        title: 'Interactive Dashboards',
-        desc: 'Real-time reporting on operations, financial metrics, and user analytics with granular export features.',
-        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80',
-        btnText: 'View Mockup',
-        link: '/contact'
+        title: 'Real-Time Dashboards',
+        desc: 'Easy-to-read screens showing your sales, user activity, and business performance in real time.',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80',
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Bespoke Admin Panel',
-        desc: 'Manage users, permissions, logs, settings, and workflows without touching a single line of code.',
-        image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Explore System',
-        link: '/contact'
+        title: 'Custom Admin Panels',
+        desc: 'A simple control center that lets you manage users, update settings, and view reports without touching code.',
+        image: adminPanelMockup,
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Core Backend APIs',
-        desc: 'High-throughput, fully documented RESTful and GraphQL APIs built with rock-solid server-side logic.',
+        title: 'Secure App Connections',
+        desc: 'Connects your different systems and apps together securely so information updates instantly.',
         image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=80',
-        btnText: 'See Docs',
-        link: '/contact'
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Database Architectures',
-        desc: 'Relational and document databases optimized with indexing, partition, and automated backup pipelines.',
-        image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Database Specs',
-        link: '/contact'
+        title: 'Safe Database Storage',
+        desc: 'A secure database that organizes and saves all your user details, orders, and company data with daily backups.',
+        image: sqlDatabaseLogo,
+        btnText: '',
+        link: ''
       }
     ],
     whyChooseUsTitle: 'Why Choose CreativeDesk?',
     whyChooseUsDesc: 'We make developing and deploying custom enterprise software easy, secure, and hassle-free.',
-    whyChooseUsMiddleImage: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80',
+    whyChooseUsMiddleImage: whyChooseUsImg,
     whyChooseUs: [
       { title: 'Tailored Business Logic', desc: 'Every line of code is structured to align with your exact business processes.' },
       { title: 'Granular Access Control', desc: 'Secure authorization layers to safeguard sensitive business and user records.' },
@@ -112,50 +133,50 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
     offerings: [
       {
         title: 'Seller Dashboard',
-        desc: 'Dedicated panel for store owners to manage inventories, view orders, track income, and arrange payouts.',
-        image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Check Out',
-        link: '/contact'
+        desc: 'A private dashboard for shop owners to upload items, check customer orders, and track their daily sales.',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80',
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Powerful Admin Panel',
-        desc: 'System control center to manage commissions, payments, vendors, users, and review insights.',
+        title: 'Master Control Center',
+        desc: 'A main admin panel for you to manage platform commissions, review vendor listings, and handle all users.',
         image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Check Out',
-        link: '/contact'
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Customer Android & iOS App',
-        desc: 'Feature-rich native mobile applications for customers with address locators, cart flows, and live tracking.',
+        title: 'Customer Android & iOS Apps',
+        desc: 'Beautiful, fast mobile apps for customers to browse your products, add items to cart, and track orders.',
         image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Download Now',
-        link: '/contact'
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Responsive Web Storefront',
-        desc: 'Gorgeous customer web application with fast indexing, payment integrations, and dynamic searching.',
+        title: 'Fast Online Shop Website',
+        desc: 'A modern, responsive e-commerce website that looks great and works perfectly on both phones and computers.',
         image: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Explore Demo',
-        link: '/contact'
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Delivery Boy App & Panel',
-        desc: 'Dedicated mobile workflow for riders to accept shipments, manage drop-offs, and trace earning histories.',
+        title: 'Rider Delivery App',
+        desc: 'A simple mobile app for delivery drivers to accept delivery requests, see addresses, and update order status.',
         image: 'https://images.unsplash.com/photo-1526367790999-015078648c7e?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Check Out',
-        link: '/contact'
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Partner App Manager',
-        desc: 'Mobile manager allowing merchant managers to adjust stock, modify prices, and process orders on the fly.',
+        title: 'Store Manager Mobile App',
+        desc: 'A lightweight mobile app that lets shop managers process orders, edit item prices, and check stock on the go.',
         image: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Download Now',
-        link: '/contact'
+        btnText: '',
+        link: ''
       }
     ],
     whyChooseUsTitle: 'Why Choose Our Prebuilt SaaS?',
     whyChooseUsDesc: 'We make launching your commercial marketplace quick, scalable, and fully optimized.',
-    whyChooseUsMiddleImage: 'https://images.unsplash.com/photo-1557200134-90327ee9fafa?auto=format&fit=crop&w=600&q=80',
+    whyChooseUsMiddleImage: prebuiltSaasWhyChoose,
     whyChooseUs: [
       { title: 'Geo-Location Data Insights', desc: 'Analyze delivery radii and target local client hotspots automatically.' },
       { title: 'Specially Engineered Logic', desc: 'Optimized specifically for quick-commerce, groceries, and multi-vendor suites.' },
@@ -187,32 +208,32 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
     offeringsDesc: 'Every website we deliver is audited for Core Web Vitals, responsiveness, and conversion layout.',
     offerings: [
       {
-        title: 'React & Next.js Builds',
-        desc: 'Server-side rendered and static websites offering unmatched loading speed and interactive layout.',
-        image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=500&q=80',
-        btnText: 'View Showcase',
-        link: '/contact'
+        title: 'Fast Next.js & React Sites',
+        desc: 'High-performance websites built with the latest technology so your pages load instantly for visitors.',
+        image: webReactSites,
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Headless CMS Architecture',
-        desc: 'Allow your team to publish blogs, update portfolios, and edit copy easily without code edits.',
-        image: 'https://images.unsplash.com/photo-1545670723-196ed0954986?auto=format&fit=crop&w=500&q=80',
-        btnText: 'See Configs',
-        link: '/contact'
+        title: 'Easy Content Editor',
+        desc: 'A simple dashboard that lets your team write blogs, add projects, and edit text without needing developer help.',
+        image: webContentEditor,
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Modern E-Commerce Storefronts',
-        desc: 'Lightning-fast product checkouts, dynamic cart models, and secure payment integrations.',
-        image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Launch Shop',
-        link: '/contact'
+        title: 'Modern E-Commerce Stores',
+        desc: 'Super-fast online shops with smooth checkout processes, active shopping carts, and secure payment setups.',
+        image: webEcommerceStore,
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Conversion Landing Pages',
-        desc: 'Tailored single-page funnel sites engineered with clear call-to-actions, hooks, and high copy layouts.',
-        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Boost Leads',
-        link: '/contact'
+        title: 'High-Converting Landing Pages',
+        desc: 'Clean, focused single-page websites engineered to showcase your product and turn visitors into buyers.',
+        image: webLandingPages,
+        btnText: '',
+        link: ''
       }
     ],
     whyChooseUsTitle: 'Why Choose CreativeDesk Websites?',
@@ -244,42 +265,42 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
     valueStatement: 'Scale sales and customer loyalty with feature-rich mobile apps engineered for fluid gestures, fast loading, and offline access.',
     priceStatement: 'Cross-platform app packages starting from just Rs.120,000/-',
     ctaText: 'Build Your App',
-    heroImage: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=1000&q=80',
+    heroImage: mobileAppsHero,
     offeringsTitle: 'What All We Offer',
     offeringsDesc: 'We handle everything from initial UI/UX designs to Apple Store and Google Play Store launch.',
     offerings: [
       {
-        title: 'Flutter Mobile App',
-        desc: 'Stunning single-codebase application with native rendering speed, custom widgets, and smooth layouts.',
-        image: 'https://images.unsplash.com/photo-1617042375876-a13e36732a04?auto=format&fit=crop&w=500&q=80',
-        btnText: 'See Mockup',
-        link: '/contact'
+        title: 'Stunning Flutter Apps',
+        desc: 'Beautiful applications designed to run smoothly on both Android and iOS devices from one codebase.',
+        image: mobileFlutterApps,
+        btnText: '',
+        link: ''
       },
       {
-        title: 'React Native Apps',
-        desc: 'Highly modular applications incorporating native components for immediate UI response and fast updates.',
-        image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=500&q=80',
-        btnText: 'View Tech',
-        link: '/contact'
+        title: 'Fast React Native Apps',
+        desc: 'Highly responsive mobile apps that feel fast, scroll smoothly, and update with zero delay.',
+        image: mobileReactNative,
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Store Publishing Support',
-        desc: 'Complete assistance setting up Apple Developer accounts, preparing store listings, assets, and passing review.',
-        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80',
-        btnText: 'App Store Specs',
-        link: '/contact'
+        title: 'App Store Launch Support',
+        desc: 'We handle the technical side of uploading and publishing your apps to Apple App Store and Google Play Store.',
+        image: mobileAppStoreLaunch,
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Offline-First Database',
-        desc: 'Local state caching so your customers can browse catalogues, add notes, and check profiles without internet.',
-        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Database Specs',
-        link: '/contact'
+        title: 'Offline Database Support',
+        desc: 'Your app will still show products, save settings, and open saved pages even when the customer has no internet.',
+        image: mobileOfflineDb,
+        btnText: '',
+        link: ''
       }
     ],
     whyChooseUsTitle: 'Why Choose Our Mobile Apps?',
     whyChooseUsDesc: 'We specialize in building lightweight, interactive, and high-performance cross-platform applications.',
-    whyChooseUsMiddleImage: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80',
+    whyChooseUsMiddleImage: mobileWhyChooseUs,
     whyChooseUs: [
       { title: 'Frictionless Gestures & UI', desc: 'Custom transitions, scroll animations, and swipe actions that feel natural.' },
       { title: 'Unified Codebase System', desc: 'Single codebase powering both Android and iOS devices, halving update costs.' },
@@ -306,42 +327,42 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
     valueStatement: 'Focus on scaling your business. Leave server management, security audits, and bug fixes to our expert engineering team.',
     priceStatement: 'Comprehensive maintenance support starting from just Rs.25,000/- monthly',
     ctaText: 'Get Maintenance Plan',
-    heroImage: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=1000&q=80',
+    heroImage: maintenanceHero,
     offeringsTitle: 'What All We Offer',
     offeringsDesc: 'We monitor your servers and codebase 24/7 to catch and resolve glitches before they affect users.',
     offerings: [
       {
-        title: '24/7 Server Monitoring',
-        desc: 'Uptime trackers, latency alerts, CPU usage logs, and automated script re-runs.',
-        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=500&q=80',
-        btnText: 'View Logs Flow',
-        link: '/contact'
+        title: '24/7 Uptime Monitoring',
+        desc: 'We watch your servers day and night to fix errors instantly and keep your platforms online.',
+        image: maintenanceUptimeMonitoring,
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Continuous Data Backups',
-        desc: 'Daily encrypted backups stored on multiple cloud locations to ensure zero data loss.',
-        image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=500&q=80',
-        btnText: 'See Safety Specs',
-        link: '/contact'
+        title: 'Safe Daily Backups',
+        desc: 'Automated daily backups stored in secure cloud drives so your business data is always safe.',
+        image: maintenanceDailyBackups,
+        btnText: '',
+        link: ''
       },
       {
         title: 'Security Audits & Patches',
-        desc: 'Continuous package updates, SQL injection checks, dependency auditing, and SSL management.',
-        image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Auditing Flow',
-        link: '/contact'
+        desc: 'Regular software updates, SSL certificates management, and bug scans to keep hackers away from your site.',
+        image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=500&q=80',
+        btnText: '',
+        link: ''
       },
       {
         title: 'Database Tune-ups',
-        desc: 'Query auditing, database indexing, log clearing, and server storage cleanup cycles.',
-        image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Database Specs',
-        link: '/contact'
+        desc: 'We clean up and optimize your database structure regularly to keep your app fast as your users grow.',
+        image: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=500&q=80',
+        btnText: '',
+        link: ''
       }
     ],
     whyChooseUsTitle: 'Why Choose Our Support Plan?',
     whyChooseUsDesc: 'We act as your dedicated DevOps and engineering department, responding instantly to system issues.',
-    whyChooseUsMiddleImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
+    whyChooseUsMiddleImage: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80',
     whyChooseUs: [
       { title: 'Guaranteed SLA Uptime', desc: 'Our team monitors and maintains systems to ensure 99.9% uptime compliance.' },
       { title: 'Immediate Glitch Hotfixes', desc: 'Direct access to senior developer queues for immediate critical bug fixes.' },
@@ -373,37 +394,37 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
     offeringsDesc: 'We build autonomous agentic pipelines that run in the background, syncing data and handling clients.',
     offerings: [
       {
-        title: 'Custom RAG Chatbots',
-        desc: 'AI customer assistants fed with your company databases to answer client queries accurately.',
-        image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Test Bot',
-        link: '/contact'
+        title: 'Smart AI Chat Assistants',
+        desc: 'Intelligent chatbots trained on your business data to answer customer questions correctly and instantly.',
+        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80',
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Zapier & n8n Workflows',
-        desc: 'Seamless data sharing across CRM, Google Sheets, Slack, Stripe, email systems, and custom APIs.',
+        title: 'n8n & Zapier Integrations',
+        desc: 'Automate repetitive tasks by linking Google Sheets, Gmail, CRMs, and Slack to share data automatically.',
         image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Explore Workflows',
-        link: '/contact'
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Document Data Extraction',
-        desc: 'Autonomous reading and categorization of invoices, emails, receipts, and user PDFs into databases.',
-        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Run Extraction',
-        link: '/contact'
+        title: 'AI Document Scanners',
+        desc: 'AI systems that read invoices, receipts, and emails, extracting the important data into your databases.',
+        image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=500&q=80',
+        btnText: '',
+        link: ''
       },
       {
-        title: 'Semantic Data Search',
-        desc: 'Build smart internal search tools that understand user search intent instead of just keywords.',
+        title: 'Smart Internal Search',
+        desc: 'A search engine for your database that understands what you mean, rather than just matching keywords.',
         image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=500&q=80',
-        btnText: 'Try Search',
-        link: '/contact'
+        btnText: '',
+        link: ''
       }
     ],
     whyChooseUsTitle: 'Why Automate with CreativeDesk?',
     whyChooseUsDesc: 'We design intelligent workflows that eliminate hours of routine administrative data entries.',
-    whyChooseUsMiddleImage: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&w=600&q=80',
+    whyChooseUsMiddleImage: 'https://images.unsplash.com/photo-1527474305487-b87b222841cc?auto=format&fit=crop&w=600&q=80',
     whyChooseUs: [
       { title: 'Zero Hallucinations Guarantee', desc: 'Secure system limits preventing LLMs from fabricating wrong info.' },
       { title: 'Drastic Operation Savings', desc: 'Perform hundreds of back-office entries in seconds for pennies.' },
@@ -420,7 +441,7 @@ export const serviceDetails: Record<string, ServiceDetailData> = {
       { name: 'Make.com', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/make/make-original.svg' },
       { name: 'LangChain', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
       { name: 'FastAPI', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg' },
-      { name: 'MySQL', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' }
+      { name: 'Pinecone', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' }
     ]
   }
 };

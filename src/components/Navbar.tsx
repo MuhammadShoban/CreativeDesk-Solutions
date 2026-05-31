@@ -7,6 +7,7 @@ const navLinks = [
   { label: 'Services',     href: '/services' },
   { label: 'About',        href: '/about' },
   { label: 'Portfolio',    href: '/portfolio' },
+  { label: 'Blog',         href: '/blog' },
   { label: 'Contact',      href: '/contact' },
 ];
 
@@ -34,6 +35,7 @@ export default function Navbar() {
     const cleanHref = href.replace(/^\/+/, '').replace(/\/+$/, '');
     if (cleanCurrent === '' && cleanHref === '') return true;
     if (cleanHref === 'services' && cleanCurrent.startsWith('services')) return true;
+    if (cleanHref === 'blog' && cleanCurrent.startsWith('blog')) return true;
     return cleanCurrent === cleanHref;
   };
 

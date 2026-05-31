@@ -9,29 +9,31 @@
 
     <!-- SEO Meta Tags -->
     <title>CreativeDesk Solutions | Web &amp; Mobile App Development Agency</title>
-    <meta name="description" content="CreativeDesk Solutions is a premium IT company delivering customized Web Development, Mobile Apps, and AI-automated workflows for your business growth." />
-    <meta name="keywords" content="CreativeDesk, CreativeDesk Solutions, Web Development, Mobile Apps, AI Automation, App Maintenance, Digital Marketing, Custom Software Development" />
-    <meta name="robots" content="index, follow" />
+    <meta name="description" content="CreativeDesk Solutions is a full-service web &amp; mobile app development agency. We build high-performance websites, React/Next.js apps, mobile apps, AI automation workflows, and e-commerce stores for businesses worldwide." />
+    <meta name="keywords" content="web development company, mobile app development, affordable web development services, custom software development, React Next.js development, AI automation services, e-commerce website development, CreativeDesk Solutions" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="theme-color" content="#7c3aed" />
+    <link rel="canonical" href="https://www.creativedesksolutions.com/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="CreativeDesk Solutions | Web &amp; Mobile App Development Agency" />
-    <meta property="og:description" content="CreativeDesk Solutions is a premium IT company delivering customized Web Development, Mobile Apps, and AI-automated workflows." />
+    <meta property="og:description" content="CreativeDesk Solutions builds high-performance websites, mobile apps, and AI automation workflows for businesses globally. Affordable. Fast. Results-driven." />
     <meta property="og:site_name" content="CreativeDesk Solutions" />
+    <meta property="og:url" content="https://www.creativedesksolutions.com/" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CreativeDesk Solutions" />
-    <meta name="twitter:description" content="CreativeDesk Solutions is a premium IT company delivering Web Development, Mobile Apps, and AI Automations." />
+    <meta name="twitter:title" content="CreativeDesk Solutions | Web &amp; Mobile App Development Agency" />
+    <meta name="twitter:description" content="High-performance websites, mobile apps, and AI automation — built for businesses worldwide by CreativeDesk Solutions." />
 
-    <!-- Structured Data (JSON-LD) for Rich Google Search Snippet & Sitelinks -->
+    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
+          "@type": ["Organization", "ProfessionalService"],
           "@id": "https://www.creativedesksolutions.com/#organization",
           "name": "CreativeDesk Solutions",
           "url": "https://www.creativedesksolutions.com/",
@@ -39,7 +41,20 @@
             "@type": "ImageObject",
             "url": "https://www.creativedesksolutions.com/logo.png",
             "caption": "CreativeDesk Solutions"
-          }
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+92-340-0744384",
+            "contactType": "customer service",
+            "email": "hirecreativedesksolutions@gmail.com",
+            "availableLanguage": ["English", "Urdu"]
+          },
+          "sameAs": [
+            "https://www.instagram.com/creativedesksolutions/",
+            "https://wa.me/923400744384"
+          ],
+          "priceRange": "$$",
+          "description": "Full-service web and mobile app development agency delivering high-performance websites, React/Next.js apps, mobile apps, AI automation workflows, and e-commerce stores for businesses worldwide."
         },
         {
           "@type": "WebSite",
@@ -47,12 +62,10 @@
           "url": "https://www.creativedesksolutions.com/",
           "name": "CreativeDesk Solutions",
           "description": "Premium Web Development, Mobile Apps & AI-automated workflows.",
-          "publisher": {
-            "@id": "https://www.creativedesksolutions.com/#organization"
-          },
+          "publisher": { "@id": "https://www.creativedesksolutions.com/#organization" },
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://www.creativedesksolutions.com/?s={search_term_string}",
+            "target": "https://www.creativedesksolutions.com/blog?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         },
@@ -61,73 +74,65 @@
           "@id": "https://www.creativedesksolutions.com/#webpage",
           "url": "https://www.creativedesksolutions.com/",
           "name": "CreativeDesk Solutions | Web & Mobile App Development Agency",
-          "isPartOf": {
-            "@id": "https://www.creativedesksolutions.com/#website"
-          },
-          "about": {
-            "@id": "https://www.creativedesksolutions.com/#organization"
-          },
-          "description": "CreativeDesk Solutions is a premium IT company delivering customized Web Development, Mobile Apps, and AI-automated workflows."
-        },
-        {
-          "@type": "SiteNavigationElement",
-          "@id": "https://www.creativedesksolutions.com/#navigation",
-          "name": [
-            "About Us",
-            "Customized Development",
-            "Portfolio",
-            "Why Us",
-            "FAQ",
-            "Contact Us"
-          ],
-          "url": [
-            "https://www.creativedesksolutions.com/#about",
-            "https://www.creativedesksolutions.com/#services",
-            "https://www.creativedesksolutions.com/#portfolio",
-            "https://www.creativedesksolutions.com/#why-us",
-            "https://www.creativedesksolutions.com/#faq",
-            "https://www.creativedesksolutions.com/#contact"
-          ]
+          "isPartOf": { "@id": "https://www.creativedesksolutions.com/#website" },
+          "about": { "@id": "https://www.creativedesksolutions.com/#organization" },
+          "description": "CreativeDesk Solutions is a full-service web & mobile app development agency building high-performance websites, mobile apps, and AI automation workflows for businesses worldwide."
         },
         {
           "@type": "Service",
-          "name": "Website Development Agency",
+          "name": "Website Development",
           "serviceType": "Web Development Services",
-          "provider": {
-            "@id": "https://www.creativedesksolutions.com/#organization"
-          },
-          "description": "High-performance, SEO-optimized custom website development, Next.js, React apps, and headless CMS integrations.",
-          "areaServed": "Global"
+          "provider": { "@id": "https://www.creativedesksolutions.com/#organization" },
+          "description": "High-performance, SEO-optimized custom website development using React, Next.js, and headless CMS integrations.",
+          "areaServed": "Worldwide",
+          "url": "https://www.creativedesksolutions.com/services/web-development"
         },
         {
           "@type": "Service",
           "name": "Mobile App Development",
-          "serviceType": "Mobile Application Services",
-          "provider": {
-            "@id": "https://www.creativedesksolutions.com/#organization"
-          },
-          "description": "Premium native and cross-platform mobile apps for iOS and Android built using React Native and Flutter.",
-          "areaServed": "Global"
-        },
-        {
-          "@type": "Service",
-          "name": "E-Commerce Website Development",
-          "serviceType": "E-Commerce Store Development",
-          "provider": {
-            "@id": "https://www.creativedesksolutions.com/#organization"
-          },
-          "description": "High-converting online storefronts, custom shopping carts, secure payment gateways, and backend inventory integration.",
-          "areaServed": "Global"
+          "serviceType": "Mobile Application Development",
+          "provider": { "@id": "https://www.creativedesksolutions.com/#organization" },
+          "description": "Cross-platform mobile apps for iOS and Android using React Native and Flutter.",
+          "areaServed": "Worldwide",
+          "url": "https://www.creativedesksolutions.com/services/mobile-app"
         },
         {
           "@type": "Service",
           "name": "AI Automation & Chatbots",
           "serviceType": "AI Consulting & Automation",
-          "provider": {
-            "@id": "https://www.creativedesksolutions.com/#organization"
-          },
-          "description": "Intelligent automated customer workflows, custom LLM integrations, semantic RAG search, and automated backend databases.",
-          "areaServed": "Global"
+          "provider": { "@id": "https://www.creativedesksolutions.com/#organization" },
+          "description": "Intelligent automated customer workflows, custom LLM integrations, and AI-powered chatbots for business automation.",
+          "areaServed": "Worldwide",
+          "url": "https://www.creativedesksolutions.com/services/ai-automations"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How much does web development cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Web development costs vary by project type: a landing page typically costs $500–$3,000, a business website $2,000–$10,000, an e-commerce store $5,000–$30,000, and a custom web application $15,000–$100,000+. Contact CreativeDesk Solutions for a free quote."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What technologies does CreativeDesk Solutions use?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We specialize in React, Next.js, Node.js, Flutter, React Native, TypeScript, and AI/LLM integrations. We also work with headless CMS platforms and modern cloud infrastructure."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you work with international clients?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. CreativeDesk Solutions works with clients globally. We communicate in English and support all time zones. Our clients span the US, UK, UAE, and beyond."
+              }
+            }
+          ]
         }
       ]
     }
@@ -141,8 +146,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Preconnect to Unsplash CDN (social proof avatars in Hero) -->
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <!-- Preload the font stylesheet to initiate fetch immediately -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    />
 
     <!-- 
       Load Google Fonts with display=swap to avoid FOIT (Flash of Invisible Text)
@@ -162,6 +171,7 @@
         rel="stylesheet"
       />
     </noscript>
+
 
     <!-- Critical inline CSS: font-face fallbacks to prevent CLS before webfonts load -->
     <style>
