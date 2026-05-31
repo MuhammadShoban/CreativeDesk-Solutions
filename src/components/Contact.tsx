@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { IconMail, IconPhone, IconPin, IconCheck } from './Icons';
 import whatsappIcon from '../assets/whatsapp.png';
 
@@ -6,17 +6,70 @@ interface ContactProps {
   isPage?: boolean;
 }
 
+type Status = 'idle' | 'loading' | 'success' | 'error';
+
+const SERVICE_LABELS: Record<string, string> = {
+  'web-dev':          'Website Development',
+  'mobile-dev':       'Mobile App Development',
+  'maintenance':      'Web & App Maintenance',
+  'digital-marketing':'Digital Marketing',
+  'ai-automations':   'AI Automations',
+};
+
 export default function Contact({ isPage = false }: ContactProps) {
   const [form, setForm] = useState({ name:'', email:'', phone:'', service:'web-dev', message:'' });
-  const [done, setDone] = useState(false);
+  const [status, setStatus] = useState<Status>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
-  const handle = (e: React.FormEvent) => {
+  const handle = async (e: React.FormEvent) => {
     e.preventDefault();
-    setDone(true);
-    setTimeout(() => {
-      setDone(false);
-      setForm({ name:'', email:'', phone:'', service:'web-dev', message:'' });
-    }, 5000);
+
+    // Honeypot check — bots fill hidden fields, humans don't
+    if (honeypotRef.current?.value) return;
+
+    setStatus('loading');
+    setErrorMsg('');
+
+    try {
+      const accessKey = import.meta.env.VITE_WEB3FORMS_KEY;
+      if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
+        throw new Error('Web3Forms access key is not configured. Please add VITE_WEB3FORMS_KEY to your .env.local file.');
+      }
+
+      const payload = {
+        access_key: accessKey,
+        subject: `New Inquiry from ${form.name} — ${SERVICE_LABELS[form.service] ?? form.service}`,
+        from_name: 'CreativeDesk Solutions Website',
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        service: SERVICE_LABELS[form.service] ?? form.service,
+        message: form.message,
+        botcheck: '',   // must be empty — security field
+      };
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus('success');
+        setTimeout(() => {
+          setStatus('idle');
+          setForm({ name:'', email:'', phone:'', service:'web-dev', message:'' });
+        }, 6000);
+      } else {
+        throw new Error(data.message ?? 'Submission failed. Please try again.');
+      }
+    } catch (err: unknown) {
+      setStatus('error');
+      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    }
   };
 
   const infos = [
@@ -165,7 +218,7 @@ export default function Contact({ isPage = false }: ContactProps) {
 
           {/* Right: Form */}
           <div className="glass-card p-5 sm:p-8 lg:p-10">
-            {done ? (
+            {status === 'success' ? (
               <div className="flex flex-col items-center text-center py-10 gap-5">
                 <span className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200
                                  flex items-center justify-center text-emerald-500 text-3xl">
@@ -180,12 +233,32 @@ export default function Contact({ isPage = false }: ContactProps) {
               </div>
             ) : (
               <form onSubmit={handle} className="flex flex-col gap-5">
+                {/* Honeypot — hidden from humans, catches bots */}
+                <input
+                  ref={honeypotRef}
+                  type="text"
+                  name="botcheck"
+                  style={{ display: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
                 <div>
                   <h3 className="font-jakarta font-extrabold text-xl text-slate-900 mb-1">
                     Request a Discovery Call
                   </h3>
                   <p className="text-sm text-slate-500">All inquiries are strictly confidential.</p>
                 </div>
+
+                {/* Error banner */}
+                {status === 'error' && (
+                  <div className="flex items-start gap-3 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-jakarta">
+                    <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                    <span>{errorMsg}</span>
+                  </div>
+                )}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
@@ -195,6 +268,7 @@ export default function Contact({ isPage = false }: ContactProps) {
                     <input
                       required placeholder="e.g. Sarah Jenkins" className="form-input"
                       value={form.name} onChange={e => setForm({...form, name:e.target.value})}
+                      disabled={status === 'loading'}
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
@@ -204,6 +278,7 @@ export default function Contact({ isPage = false }: ContactProps) {
                     <input
                       required type="tel" placeholder="e.g. +92 300 1234567" className="form-input"
                       value={form.phone} onChange={e => setForm({...form, phone:e.target.value})}
+                      disabled={status === 'loading'}
                     />
                   </div>
                 </div>
@@ -216,6 +291,7 @@ export default function Contact({ isPage = false }: ContactProps) {
                     <input
                       required type="email" placeholder="sarah@company.com" className="form-input"
                       value={form.email} onChange={e => setForm({...form, email:e.target.value})}
+                      disabled={status === 'loading'}
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
@@ -225,10 +301,11 @@ export default function Contact({ isPage = false }: ContactProps) {
                     <select
                       className="form-input"
                       value={form.service} onChange={e => setForm({...form, service:e.target.value})}
+                      disabled={status === 'loading'}
                     >
                       <option value="web-dev">Website Development</option>
                       <option value="mobile-dev">Mobile App Development</option>
-                      <option value="maintenance">Web & App Maintenance</option>
+                      <option value="maintenance">Web &amp; App Maintenance</option>
                       <option value="digital-marketing">Digital Marketing</option>
                       <option value="ai-automations">AI Automations</option>
                     </select>
@@ -243,11 +320,24 @@ export default function Contact({ isPage = false }: ContactProps) {
                     required rows={4} className="form-input resize-none"
                     placeholder="Describe your goals, scale, and timeline..."
                     value={form.message} onChange={e => setForm({...form, message:e.target.value})}
+                    disabled={status === 'loading'}
                   />
                 </div>
 
-                <button type="submit" className="btn-primary justify-center w-full py-4 text-base">
-                  Submit Request
+                <button
+                  type="submit"
+                  className="btn-primary justify-center w-full py-4 text-base disabled:opacity-70 disabled:cursor-not-allowed"
+                  disabled={status === 'loading'}
+                >
+                  {status === 'loading' ? (
+                    <span className="flex items-center gap-2">
+                      <svg className="animate-spin w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                      </svg>
+                      Sending…
+                    </span>
+                  ) : 'Submit Request'}
                 </button>
               </form>
             )}
