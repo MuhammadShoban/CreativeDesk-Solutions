@@ -226,7 +226,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.instagram.com/creativedesksolutions/"
+                href="https://www.instagram.com/hirecreativedesksolutions/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-white/5 border border-white/10 hover:border-[#ee2a7b]/40 hover:bg-[#ee2a7b]/10 text-slate-400 hover:text-[#ee2a7b] flex items-center justify-center transition-all duration-300"
@@ -237,7 +237,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.facebook.com/creativedesksolutions/"
+                href="https://www.facebook.com/profile.php?id=61590390629699"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-white/5 border border-white/10 hover:border-[#1877F2]/40 hover:bg-[#1877F2]/10 text-slate-400 hover:text-[#1877F2] flex items-center justify-center transition-all duration-300"
@@ -248,7 +248,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/company/creativedesksolutions/"
+                href="https://www.linkedin.com/company/creative-desk-solutions/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-white/5 border border-white/10 hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/10 text-slate-400 hover:text-[#0A66C2] flex items-center justify-center transition-all duration-300"
