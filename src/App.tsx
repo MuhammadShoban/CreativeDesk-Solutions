@@ -23,6 +23,8 @@ const FloatingContact     = lazy(() => import('./components/FloatingContact'));
 const TopProjects         = lazy(() => import('./components/TopProjects'));
 const ServiceDetail       = lazy(() => import('./components/ServiceDetail'));
 const Blog                = lazy(() => import('./components/Blog'));
+const NotFound404         = lazy(() => import('./components/NotFound404'));
+const Error500            = lazy(() => import('./components/Error500'));
 
 // ── Lightweight skeleton loader for below-fold sections ──
 function SectionSkeleton() {
@@ -88,7 +90,9 @@ function getPageFromPath(path: string) {
   if (cleanPath === 'contact') return 'contact';
   if (cleanPath === 'top-projects') return 'top-projects';
   if (cleanPath === 'blog' || cleanPath.startsWith('blog/')) return 'blog';
-  return 'home';
+  if (cleanPath === '500' || cleanPath === 'error') return '500';
+  if (cleanPath === '') return 'home';
+  return '404';
 }
 
 function App() {
@@ -307,11 +311,24 @@ function App() {
             <Blog currentPath={currentPath} />
           </Suspense>
         )}
+
+        {activePage === '404' && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <NotFound404 />
+          </Suspense>
+        )}
+
+        {activePage === '500' && (
+          <Suspense fallback={<SectionSkeleton />}>
+            <Error500 />
+          </Suspense>
+        )}
       </main>
 
-      {/* CREATIVEDESK SOLUTIONS loader section above footer */}
-      <LazySection>
-        <div className="bg-slate-950 flex justify-center items-center py-20 overflow-hidden select-none">
+      {/* CREATIVEDESK SOLUTIONS loader section above footer — hidden on error pages */}
+      {activePage !== '404' && activePage !== '500' && (
+        <LazySection>
+          <div className="bg-slate-950 flex justify-center items-center py-20 overflow-hidden select-none">
           <div className="loader-wrapper scale-75 sm:scale-100 md:scale-125 lg:scale-150 my-0">
             <span className="loader-letter">C</span>
             <span className="loader-letter">R</span>
@@ -340,13 +357,16 @@ function App() {
             <div className="loader" />
           </div>
         </div>
-      </LazySection>
+        </LazySection>
+      )}
 
-      <LazySection>
-        <Suspense fallback={null}>
-          <Footer />
-        </Suspense>
-      </LazySection>
+      {activePage !== '404' && activePage !== '500' && (
+        <LazySection>
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
+        </LazySection>
+      )}
 
     </>
   );
