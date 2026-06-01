@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.creativedesksolutions.com/sitemap.xml
+Sitemap: https://www.creativedesksolutions.online/sitemap.xml
