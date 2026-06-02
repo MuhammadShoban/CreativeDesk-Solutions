@@ -92,7 +92,7 @@ export default function Footer() {
       const data = await res.json();
       if (data.success) {
         setNlStatus('success');
-        setNlMessage('You're subscribed! 🎉 Welcome aboard.');
+        setNlMessage("You're subscribed! 🎉 Welcome aboard.");
         setNlEmail('');
       } else {
         throw new Error(data.message || 'Submission failed');
