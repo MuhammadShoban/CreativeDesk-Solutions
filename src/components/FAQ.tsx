@@ -82,6 +82,9 @@ export default function FAQ() {
                   {/* Header click area */}
                   <button
                     onClick={() => toggle(idx)}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${idx}`}
+                    id={`faq-question-${idx}`}
                     className="w-full text-left p-5 sm:p-6 pl-6 sm:pl-8 flex items-center justify-between gap-4 font-jakarta font-bold text-slate-800 text-sm sm:text-base hover:text-brand-600 transition-colors"
                   >
                     <span>{item.question}</span>
@@ -93,6 +96,7 @@ export default function FAQ() {
                       stroke="currentColor"
                       strokeWidth="2.5"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
@@ -100,11 +104,18 @@ export default function FAQ() {
 
                   {/* Expanding content wrapper */}
                   <div
+                    id={`faq-answer-${idx}`}
+                    role="region"
+                    aria-labelledby={`faq-question-${idx}`}
                     className={`transition-all duration-300 overflow-hidden ${
                       isOpen ? 'max-h-[300px]' : 'max-h-0'
                     }`}
                   >
-                    <div className="p-5 sm:p-6 pl-6 sm:pl-8 pt-0 text-slate-500 text-xs sm:text-sm leading-relaxed border-t border-slate-50">
+                    {/* data-snippet tells Bing/Copilot this text is citable grounding content */}
+                    <div
+                      className="p-5 sm:p-6 pl-6 sm:pl-8 pt-0 text-slate-500 text-xs sm:text-sm leading-relaxed border-t border-slate-50"
+                      data-snippet="true"
+                    >
                       {item.answer}
                     </div>
                   </div>

@@ -1,5 +1,6 @@
 import './App.css';
 import { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import { useSEO } from './useSEO';
 
 // ── Critical path: load Navbar + Hero immediately (above-the-fold) ──
 import Navbar from './components/Navbar';
@@ -97,6 +98,10 @@ function getPageFromPath(path: string) {
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const activePage = getPageFromPath(currentPath);
+
+  // ── Dynamic per-page SEO: title, meta description, canonical, BreadcrumbList ──
+  useSEO(activePage, currentPath);
 
   useEffect(() => {
     const handleLocationChange = () => {
@@ -182,8 +187,6 @@ function App() {
       }
     }
   }, [currentPath]);
-
-  const activePage = getPageFromPath(currentPath);
 
   return (
     <>
